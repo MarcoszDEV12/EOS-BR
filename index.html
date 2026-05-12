@@ -93,7 +93,6 @@
       box-shadow: 0 10px 20px rgba(238, 77, 45, 0.3);
     }
 
-    /* Grid layouts */
     .grid-row-item { display: grid; gap: 16px; align-items: end; padding: 16px 0; border-bottom: 1px solid #f1f5f9; grid-template-columns: 1.5fr 1fr 1fr 2fr; }
     .grid-row-dmo { display: grid; gap: 16px; align-items: end; padding: 16px 0; border-bottom: 1px solid #f1f5f9; grid-template-columns: 1.5fr 0.8fr 0.8fr 0.8fr 2fr; }
     .grid-row-compact { display: grid; gap: 16px; align-items: end; padding: 16px 0; border-bottom: 1px solid #f1f5f9; grid-template-columns: 1.5fr 1fr 2fr; }
@@ -213,7 +212,6 @@
           </div>
           <input type="file" id="file_final" class="hidden" accept="image/*" onchange="handleFileUpload(this, 'final')">
           <input type="hidden" name="FOTO_FINAL" id="data_final">
-          <!-- Link do Drive vinculado ao código -->
           <input type="hidden" name="drive_folder_link" value="https://drive.google.com/drive/folders/15SYHiWGr2mX3cv4UrgT99M5MxG5P1Xy6">
         </div>
 
@@ -238,12 +236,11 @@
   <canvas id="photoCanvas" class="hidden"></canvas>
 
   <script>
-    // Lógica do Relógio
+    // Relógio em tempo real
     setInterval(() => {
       document.getElementById('clock').innerText = new Date().toLocaleTimeString('pt-BR');
     }, 1000);
 
-    // Configurações das Áreas
     const config = {
       INBOUND: [
         {type: 'sim_nao_just_anexo', label: 'DDS'},
@@ -344,7 +341,7 @@
         {type: 'qtd_just_anexo', label: 'MTS CANCELADAS'},
         {type: 'qtd_just_anexo', label: 'PENDENTE DE SEPARAÇÃO'},
         {type: 'qtd_just_anexo', label: 'MTS PENDENTE DE APROVAÇÃO'},
-        {type: 'manga_reversa', label: 'MANGA PARA REVERSA'},
+        {type: 'qtd_just_anexo', label: 'MANGA PARA REVERSA'},
         {type: 'qtd_just_anexo', label: 'ANÁLISE DE ITENS PARADOS'},
         {type: 'qtd_just_anexo', label: 'TOS'},
         {type: 'qtd_just_anexo', label: 'LH'},
@@ -484,7 +481,7 @@
             <div class="flex gap-1">
               <button type="button" onclick="setToggle(this, '${id}_v', 'SIM')" class="btn-toggle text-xs">SIM</button>
               <button type="button" onclick="setToggle(this, '${id}_v', 'NÃO')" class="btn-toggle text-xs">NÃO</button>
-              <input type="hidden" id="${id}_v" name="${prefix}_STATUS">
+              <input type="hidden" id="${id}_v" name="${prefix}_STATUS" required>
             </div>
             <div class="col-span-2 flex gap-2">
               <input type="text" name="${prefix}_JUST" class="input-premium flex-1" placeholder="Justificativa">
@@ -532,8 +529,10 @@
           img.onload = () => {
             const c = document.getElementById('photoCanvas');
             const ctx = c.getContext('2d');
-            const scale = 800 / img.width; 
-            c.width = 800; c.height = img.height * scale;
+            const maxWidth = 800;
+            const scale = maxWidth / img.width; 
+            c.width = maxWidth; 
+            c.height = img.height * scale;
             ctx.drawImage(img, 0, 0, c.width, c.height);
             
             if(id === 'final') {
@@ -565,7 +564,7 @@
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
         pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save('Relatorio_Passagem_Turno.pdf');
+        pdf.save(`Relatorio_${new Date().toLocaleDateString()}.pdf`);
       } catch (err) {
         alert("Erro ao gerar PDF.");
       } finally {
@@ -592,7 +591,6 @@
       const data = Object.fromEntries(formData.entries());
 
       try {
-        // Link do seu Web App do Google Apps Script
         const url = "https://script.google.com/macros/s/AKfycbzx0DVmrRicbZ2jvQ1-3nLkTYXBY51wFMr2LKDBTW3b8nq4im_hssX39t4gzdBMqX--/exec";
         
         await fetch(url, {
