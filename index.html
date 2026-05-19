@@ -1,721 +1,812 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EOS-BR | Passagem de Turno Premium</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --shopee-orange: #EE4D2D;
-      --shopee-bg: #f0f2f5;
-      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    }
- 
-    body {
-      background-color: var(--shopee-bg);
-      font-family: 'Archivo', sans-serif;
-      color: #333;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EOS-BR | QUALIDADE PREMIUM</title>
 
-    .shopee-header {
-      background: linear-gradient(135deg, #ee4d2d, #ff7337);
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 15px rgba(238, 77, 45, 0.2);
-    }
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-    .card-master {
-      background: white;
-      border-radius: 16px;
-      box-shadow: var(--card-shadow);
-      margin-bottom: 24px;
-      padding: 24px;
-      border: 1px solid #edf2f7;
-      transition: all 0.3s ease;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    .section-title {
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--shopee-orange);
-      border-left: 5px solid var(--shopee-orange);
-      padding-left: 12px;
-      margin-bottom: 24px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+<style>
 
-    .input-premium {
-      height: 48px;
-      border: 2px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 0 14px;
-      width: 100%;
-      transition: all 0.3s;
-      font-size: 14px;
-      font-weight: 600;
-      background: #f8fafc;
-    }
+:root{
+--orange:#EE4D2D;
+--orange2:#ff7337;
+--bg:#eef2f7;
+--dark:#111827;
+--card:#ffffff;
+--green:#10b981;
+--red:#ef4444;
+}
 
-    .input-premium:focus {
-      border-color: var(--shopee-orange);
-      outline: none;
-      background: #fff;
-      box-shadow: 0 0 0 4px rgba(238, 77, 45, 0.1);
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Archivo',sans-serif;
+}
 
-    .btn-toggle {
-      height: 48px;
-      flex: 1;
-      border: 2px solid #e2e8f0;
-      border-radius: 10px;
-      font-weight: 700;
-      background: #fff;
-      color: #64748b;
-      transition: all 0.2s;
-    }
+body{
+background:linear-gradient(135deg,#eef2f7,#dbe6f3);
+min-height:100vh;
+color:#111827;
+}
 
-    .active-sim { background: #10b981 !important; color: white !important; border-color: #10b981 !important; }
-    .active-nao { background: #ee4d2d !important; color: white !important; border-color: #ee4d2d !important; }
+::-webkit-scrollbar{
+width:8px;
+}
 
-    .btn-send {
-      background: linear-gradient(90deg, #ee4d2d, #ff7337);
-      color: white;
-      font-weight: 800;
-      text-transform: uppercase;
-      transition: all 0.3s;
-      box-shadow: 0 10px 20px rgba(238, 77, 45, 0.3);
-    }
+::-webkit-scrollbar-thumb{
+background:var(--orange);
+border-radius:20px;
+}
 
-    .grid-row-item { display: grid; gap: 16px; align-items: end; padding: 16px 0; border-bottom: 1px solid #f1f5f9; grid-template-columns: 1.5fr 1fr 1fr 2fr; }
-    .grid-row-dmo { display: grid; gap: 16px; align-items: end; padding: 16px 0; border-bottom: 1px solid #f1f5f9; grid-template-columns: 1.5fr 0.8fr 0.8fr 0.8fr 2fr; }
-    .grid-row-compact { display: grid; gap: 16px; align-items: end; padding: 16px 0; border-bottom: 1px solid #f1f5f9; grid-template-columns: 1.5fr 1fr 2fr; }
-    .grid-row-idle { display: grid; gap: 16px; align-items: end; padding: 16px 0; border-bottom: 1px solid #f1f5f9; grid-template-columns: 1.2fr 1fr 0.8fr 1.5fr 1fr; }
+.topbar{
+position:sticky;
+top:0;
+z-index:999;
+padding:18px 30px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:linear-gradient(135deg,#EE4D2D,#ff7337);
+box-shadow:0 10px 30px rgba(238,77,45,.35);
+}
 
-    @media (max-width: 768px) {
-      .grid-row-item, .grid-row-dmo, .grid-row-compact, .grid-row-idle { grid-template-columns: 1fr !important; }
-    }
+.logo-wrap{
+display:flex;
+align-items:center;
+gap:18px;
+}
 
-    #success-modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0; top: 0; width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.6);
-      backdrop-filter: blur(5px);
-      align-items: center;
-      justify-content: center;
-    }
+.logo-wrap img{
+height:42px;
+filter:brightness(0) invert(1);
+}
 
-    .spinner { display: none; width: 22px; height: 22px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+.logo-text h1{
+font-size:30px;
+font-weight:900;
+color:#fff;
+line-height:1;
+letter-spacing:-1px;
+}
 
-    .btn-attached {
-      background-color: #10b981 !important;
-      border-color: #059669 !important;
-      color: white !important;
-    }
+.logo-text p{
+font-size:11px;
+font-weight:700;
+letter-spacing:4px;
+color:#fff;
+opacity:.85;
+margin-top:5px;
+}
 
-    .hide-for-pdf button, .hide-for-pdf input[type="file"], .hide-for-pdf .shopee-header {
-        display: none !important;
-    }
+.clock{
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(10px);
+padding:12px 22px;
+border-radius:999px;
+color:#fff;
+font-weight:800;
+border:1px solid rgba(255,255,255,.2);
+font-size:15px;
+}
 
-    .sub-section-header {
-      background: #f8fafc;
-      padding: 8px 12px;
-      font-weight: 700;
-      font-size: 12px;
-      color: #475569;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-radius: 6px;
-      margin-top: 16px;
-    }
-  </style>
+.container{
+max-width:1650px;
+margin:auto;
+padding:35px 20px 100px;
+}
+
+.hero-card{
+background:linear-gradient(135deg,#111827,#1f2937);
+border-radius:28px;
+padding:35px;
+margin-bottom:28px;
+position:relative;
+overflow:hidden;
+box-shadow:0 30px 60px rgba(17,24,39,.3);
+}
+
+.hero-card::before{
+content:'';
+position:absolute;
+width:400px;
+height:400px;
+background:rgba(255,255,255,.04);
+border-radius:999px;
+top:-180px;
+right:-120px;
+}
+
+.hero-card h2{
+font-size:42px;
+font-weight:900;
+color:#fff;
+line-height:1;
+margin-bottom:10px;
+}
+
+.hero-card p{
+color:#d1d5db;
+font-size:15px;
+max-width:800px;
+line-height:1.6;
+}
+
+.card{
+background:rgba(255,255,255,.88);
+backdrop-filter:blur(14px);
+border-radius:24px;
+padding:28px;
+margin-bottom:24px;
+box-shadow:0 20px 50px rgba(15,23,42,.08);
+border:1px solid rgba(255,255,255,.5);
+}
+
+.section-title{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:24px;
+}
+
+.section-title .bar{
+width:6px;
+height:28px;
+border-radius:999px;
+background:linear-gradient(180deg,#EE4D2D,#ff7337);
+}
+
+.section-title h3{
+font-size:18px;
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
+color:#111827;
+}
+
+.grid-ident{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+}
+
+.field{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.field label{
+font-size:11px;
+font-weight:900;
+letter-spacing:1px;
+color:#6b7280;
+text-transform:uppercase;
+}
+
+.input{
+height:54px;
+border:none;
+background:#f8fafc;
+padding:0 18px;
+border-radius:14px;
+font-size:14px;
+font-weight:700;
+outline:none;
+transition:.25s;
+border:2px solid transparent;
+}
+
+textarea.input{
+height:120px;
+padding-top:15px;
+resize:none;
+}
+
+.input:focus{
+border-color:#EE4D2D;
+background:#fff;
+box-shadow:0 0 0 6px rgba(238,77,45,.12);
+}
+
+.big-grid{
+display:grid;
+grid-template-columns:1.3fr .9fr 1.5fr .9fr;
+gap:16px;
+padding:18px 0;
+border-bottom:1px solid #edf2f7;
+align-items:end;
+}
+
+.big-grid:last-child{
+border:none;
+padding-bottom:0;
+}
+
+.item-title{
+font-size:13px;
+font-weight:900;
+color:#111827;
+line-height:1.4;
+text-transform:uppercase;
+}
+
+.btn-file{
+height:54px;
+border-radius:14px;
+border:none;
+background:#111827;
+color:#fff;
+font-size:12px;
+font-weight:900;
+letter-spacing:1px;
+cursor:pointer;
+transition:.25s;
+}
+
+.btn-file:hover{
+transform:translateY(-2px);
+}
+
+.toggle-wrap{
+display:flex;
+gap:8px;
+}
+
+.toggle{
+flex:1;
+height:54px;
+border:none;
+border-radius:14px;
+font-weight:900;
+cursor:pointer;
+background:#e5e7eb;
+color:#374151;
+transition:.2s;
+}
+
+.active-sim{
+background:#10b981 !important;
+color:#fff !important;
+}
+
+.active-nao{
+background:#ef4444 !important;
+color:#fff !important;
+}
+
+.footer-buttons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+margin-top:20px;
+}
+
+.btn-main{
+height:65px;
+border:none;
+border-radius:20px;
+font-size:15px;
+font-weight:900;
+cursor:pointer;
+transition:.25s;
+letter-spacing:1px;
+}
+
+.btn-download{
+background:#111827;
+color:#fff;
+box-shadow:0 20px 35px rgba(17,24,39,.25);
+}
+
+.btn-submit{
+background:linear-gradient(135deg,#EE4D2D,#ff7337);
+color:#fff;
+box-shadow:0 20px 35px rgba(238,77,45,.35);
+}
+
+.btn-main:hover{
+transform:translateY(-4px);
+}
+
+.preview-card{
+margin-top:35px;
+background:linear-gradient(135deg,#111827,#1f2937);
+border-radius:28px;
+padding:35px;
+overflow:hidden;
+position:relative;
+}
+
+.preview-card::before{
+content:'';
+position:absolute;
+width:500px;
+height:500px;
+background:rgba(255,255,255,.03);
+border-radius:999px;
+right:-220px;
+top:-220px;
+}
+
+.preview-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.preview-header h2{
+font-size:38px;
+font-weight:900;
+color:#fff;
+}
+
+.preview-header span{
+background:rgba(255,255,255,.12);
+padding:10px 18px;
+border-radius:999px;
+color:#fff;
+font-weight:800;
+font-size:13px;
+border:1px solid rgba(255,255,255,.15);
+}
+
+.preview-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+.preview-box{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+padding:22px;
+border-radius:22px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.preview-box h4{
+font-size:13px;
+font-weight:900;
+color:#ffb4a4;
+margin-bottom:12px;
+letter-spacing:1px;
+text-transform:uppercase;
+}
+
+.preview-box p{
+font-size:14px;
+line-height:1.7;
+color:#fff;
+font-weight:600;
+}
+
+@media(max-width:900px){
+
+.big-grid{
+grid-template-columns:1fr;
+}
+
+.footer-buttons{
+grid-template-columns:1fr;
+}
+
+.preview-header{
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+}
+
+.preview-header h2{
+font-size:28px;
+}
+
+.hero-card h2{
+font-size:30px;
+}
+
+}
+
+.hide-download .topbar,
+.hide-download .footer-buttons{
+display:none !important;
+}
+
+</style>
 </head>
+
 <body>
 
-  <header class="shopee-header shadow-md sticky top-0 z-50">
-    <div class="flex items-center gap-4">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="Shopee" class="h-9 brightness-0 invert">
-      <div class="text-white border-l-2 border-white/30 pl-4">
-        <h1 class="text-2xl font-black tracking-tighter">EOS-BR</h1>
-        <p class="text-[11px] font-bold uppercase opacity-90 tracking-widest">PASSAGEM DE TURNO</p>
-      </div>
-    </div>
-    <div id="clock" class="bg-black/20 text-white px-5 py-2 rounded-full text-sm font-bold border border-white/20 backdrop-blur-sm">00:00:00</div>
-  </header>
+<header class="topbar">
 
-  <main class="max-w-6xl mx-auto p-4 md:p-10">
-    <div id="report-content">
-      <form id="eosForm">
-        <div class="card-master">
-          <div class="section-title">Informações de Identificação</div>
-          <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div>
-              <label class="text-[11px] font-black text-gray-400 mb-2 block uppercase">CD Operacional</label>
-              <select name="cd_operacional" class="input-premium" required>
-                <option value="">Selecione...</option>
-                <option value="JABOATAO">Jaboatão</option>
-                <option value="FRANCO 1">Franco 1</option>
-                <option value="FRANCO 2">Franco 2</option>
-                <option value="CONTAGEM">Contagem</option>
-                <option value="NOVA SANTA RITA">Nova Santa Rita</option>
-                <option value="HIDROLÂNDIA">Hidrolândia</option>
-              </select>
-            </div>
-            <div>
-              <label class="text-[11px] font-black text-gray-400 mb-2 block uppercase">Responsável</label>
-              <input type="text" name="responsavel" class="input-premium" placeholder="Nome" required>
-            </div>
-            <div>
-              <label class="text-[11px] font-black text-gray-400 mb-2 block uppercase">Cargo</label>
-              <select name="cargo" class="input-premium" required>
-                <option value="">Selecione</option>
-                <option value="TEAM LEADER">TEAM LEADER</option>
-                <option value="COORDENADOR">COORDENADOR</option>
-                <option value="PS">PS</option>
-                <option value="SUPERVISOR">SUPERVISOR</option>
-                <option value="SUPERVISOR TURNO">SUPERVISOR TURNO</option>
-                <option value="SUPERVISOR MWH">SUPERVISOR MWH</option>
-              </select>
-            </div>
-            <div>
-              <label class="text-[11px] font-black text-gray-400 mb-2 block uppercase">Turno</label>
-              <select name="turno" class="input-premium" required>
-                <option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option>
-                <option value="T4">T4</option><option value="T5">T5</option><option value="T6">T6</option><option value="T7">T7</option>
-              </select>
-            </div>
-            <div>
-              <label class="text-[11px] font-black text-orange-600 mb-2 block uppercase">Área de Atuação</label>
-              <select name="area_atuacao" id="areaSelect" class="input-premium border-orange-200 bg-orange-50 font-extrabold text-orange-700" required onchange="renderFields()">
-                  <option value="">SELECIONAR ÁREA</option>
-                  <option value="INBOUND">INBOUND</option>
-                  <option value="PICKING LEVE">PICKING LEVE</option>
-                  <option value="PICKING VOL">PICKING VOL</option>
-                  <option value="CHECKING LEVE">CHECKING LEVE</option>
-                  <option value="CHECKING VOL">CHECKING VOL</option>
-                  <option value="SHIPPING">SHIPPING</option>
-                  <option value="INVENTARIO">INVENTÁRIO</option>
-                  <option value="IBT">IBT</option>
-                  <option value="QUALIDADE">QUALIDADE</option>
-              </select>
-            </div>
-          </div>
-        </div>
+<div class="logo-wrap">
 
-        <div id="container_areas"></div>
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg">
 
-        <div class="card-master">
-          <div class="section-title">Conclusão e Evidências</div>
-          <textarea name="JUSTIFICATIVA_FINAL" class="input-premium h-32 mb-6 py-4 resize-none" placeholder="Relate aqui os principais desafios, gargalos ou recados para o próximo turno..."></textarea>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <button type="button" id="btn_file_final" onclick="document.getElementById('file_final').click()" class="bg-gray-50 p-4 rounded-xl font-bold border-2 border-dashed border-gray-300 text-gray-600 hover:bg-gray-100 transition-all uppercase">📸 ANEXO PASSAGEM DE TURNO</button>
-              <button type="button" id="btnDownload" onclick="baixarRelatorio()" class="bg-orange-50 text-orange-700 p-4 rounded-xl font-black border-2 border-orange-200 hover:bg-orange-100 transition-all">📥 DESCARREGAR RELATÓRIO</button>
-          </div>
-          <input type="file" id="file_final" class="hidden" accept="image/*" onchange="handleFileUpload(this, 'final')">
-          <input type="hidden" name="FOTO_FINAL" id="data_final">
-          <input type="hidden" name="drive_folder_link" value="https://drive.google.com/drive/folders/15SYHiWGr2mX3cv4UrgT99M5MxG5P1Xy6">
-        </div>
+<div class="logo-text">
+<h1>EOS-BR</h1>
+<p>PASSAGEM DE TURNO PREMIUM</p>
+</div>
 
-        <button type="button" id="btnEnviar" onclick="enviarDados()" class="btn-send w-full p-6 rounded-2xl flex items-center justify-center gap-4 mb-20">
-          <span id="btnText" class="text-lg">Finalizar e Enviar Relatório</span>
-          <div id="btnSpinner" class="spinner"></div>
-        </button>
-      </form>
-    </div>
-  </main>
+</div>
 
-  <div id="success-modal">
-    <div class="bg-white p-10 rounded-2xl text-center shadow-2xl max-w-sm">
-      <div class="text-6xl mb-4">✅</div>
-      <h2 class="text-2xl font-black mb-2">Relatório Salvo!</h2>
-      <p class="text-gray-500 mb-6">Passagem de turno enviada com sucesso para a pasta do Drive.</p>
-      <button class="bg-orange-600 text-white w-full py-3 rounded-lg font-bold" onclick="location.reload()">NOVO REGISTRO</button>
-    </div>
-  </div>
+<div class="clock" id="clock">00:00:00</div>
 
-  <canvas id="photoCanvas" class="hidden"></canvas>
+</header>
 
-  <script>
-    setInterval(() => {
-      document.getElementById('clock').innerText = new Date().toLocaleTimeString('pt-BR');
-    }, 1000);
+<div class="container">
 
-    const config = {
-      INBOUND: [
-        {type: 'sim_nao_just_anexo', label: 'DDS'},
-        {type: 'qtd_just_anexo', label: 'RECEBIMENTO'},
-        {type: 'qtd_just_anexo', label: 'LH'},
-        {type: 'meta_real_perc_anexo', label: 'PUTAWAY'},
-        {type: 'qtd_just_anexo', label: 'QTD DE CARROS'},
-        {type: 'sim_nao_anexo', label: 'BUFFER PUTAWAY'},
-        {type: 'idle_custom', label: 'IDLE TIME'},
-        {type: 'qtd_just_anexo', label: 'TRATATIVAS'},
-        {type: 'toggle_just', label: 'OPA'}
-      ],
-      "PICKING LEVE": [
-        {type: 'sim_nao_just_anexo', label: 'DDS'},
-        {type: 'meta_real_perc_anexo', label: 'META DMO'},
-        {type: 'qtd_just_anexo', label: 'REIMPRESSÃO DE ENDEREÇO'},
-        {type: 'qtd_just_anexo', label: 'FALTAS'},
-        {type: 'qtd_just_anexo', label: 'AVARIAS'},
-        {type: 'relogio_just_anexo', label: 'ENTREGAS DE COTs'},
-        {type: 'idle_custom', label: 'IDLE TIME'},
-        {type: 'sim_nao_just_anexo', label: 'OPA'}
-      ],
-      "PICKING VOL": [
-        {type: 'sim_nao_just_anexo', label: 'DDS'},
-        {type: 'meta_real_perc_anexo', label: 'META DMO'},
-        {type: 'qtd_just_anexo', label: 'REIMPRESSÃO DE ENDEREÇO'},
-        {type: 'qtd_just_anexo', label: 'FALTAS'},
-        {type: 'qtd_just_anexo', label: 'AVARIAS'},
-        {type: 'relogio_just_anexo', label: 'ENTREGAS DE COTs'},
-        {type: 'idle_custom', label: 'IDLE TIME'},
-        {type: 'sim_nao_just_anexo', label: 'OPA'}
-      ],
-      "CHECKING LEVE": [
-        {type: 'sim_nao_just_anexo', label: 'DDS'},
-        {type: 'meta_real_perc_anexo', label: 'META DMO'},
-        {type: 'qtd_just_anexo', label: 'SOBRAS'},
-        {type: 'qtd_just_anexo', label: 'FALTA'},
-        {type: 'qtd_just_anexo', label: 'AVARIAS'},
-        {type: 'relogio_just_anexo', label: 'ENTREGAS DE COTs CHECKING'},
-        {type: 'idle_custom', label: 'IDLE TIME'},
-        {type: 'sim_nao_just_anexo', label: 'OPA'}
-      ],
-      "CHECKING VOL": [
-        {type: 'sim_nao_just_anexo', label: 'DDS'},
-        {type: 'meta_real_perc_anexo', label: 'META DMO'},
-        {type: 'qtd_just_anexo', label: 'SOBRAS'},
-        {type: 'qtd_just_anexo', label: 'FALTA'},
-        {type: 'qtd_just_anexo', label: 'AVARIAS'},
-        {type: 'relogio_just_anexo', label: 'ENTREGAS DE COTs CHECKING'},
-        {type: 'idle_custom', label: 'IDLE TIME'},
-        {type: 'sim_nao_just_anexo', label: 'OPA'}
-      ],
-      SHIPPING: [
-        {type: 'sim_nao_just_anexo', label: 'DDS'},
-        {type: 'meta_fixa_just_anexo', label: 'SLA TRANSPORTING', fixed: '99%'},
-        {type: 'qtd_just_anexo', label: 'PROD. TO PACKING - ESTEIRA (1) PEQ.'},
-        {type: 'qtd_just_anexo', label: 'PROD. TO PACKING - ESTEIRA (2) GDE.'},
-        {type: 'plano_real_anexo', label: 'PRODUÇÃO GERAL'},
-        {type: 'real_just_anexo', label: 'QTD CHECKED', desc: 'Maior que 1 hora'},
-        {type: 'qtd_just_anexo', label: 'TOTAL DE HC PRESENTE'},
-        {type: 'meta_fixa_just_anexo', label: 'NET', fixed: '80'},
-        {type: 'meta_fixa_just_anexo', label: 'ABS', fixed: '15%'},
-        {type: 'sim_nao_just_anexo', label: 'OPA'}
-      ],
-      INVENTARIO: [
-        {type: 'qtd_just_anexo', label: 'ESTOQUE ATUAL DE AV'},
-        {type: 'qtd_just_anexo', label: 'ESTOQUE ATUAL DE DEM'},
-        {type: 'qtd_just_anexo', label: 'ESTOQUE ATUAL GERAL'},
-        {type: 'qtd_just_anexo', label: 'TOTAL DE ENDEREÇOS'},
-        {type: 'qtd_just_anexo', label: 'ENDEREÇOS BLOQUEADOS'},
-        {type: 'qtd_just_anexo', label: 'ENDEREÇOS DESBLOQUEADOS'},
-        {type: 'qtd_just_anexo', label: 'ENDEREÇOS OCUPADOS'},
-        {type: 'qtd_real_anexo', label: 'ENDEREÇOS CONTADOS'},
-        {type: 'qtd_just_anexo', label: 'OB PICKING'},
-        {type: 'meta_real_perc_anexo', label: 'META DMO'},
-        {type: 'sim_nao_just_anexo', label: 'OPA'}
-      ],
-      IBT: [
-        {type: 'qtd_just_anexo', label: 'PEÇAS TRATADAS NO DIA'},
-        {type: 'qtd_just_anexo', label: 'SURPLUS'},
-        {type: 'qtd_just_anexo', label: 'SHORTAGES'},
-        {type: 'qtd_just_anexo', label: 'IA'},
-        {type: 'qtd_just_anexo', label: 'INV'},
-        {type: 'qtd_just_anexo', label: 'SKU'},
-        {type: 'qtd_just_anexo', label: 'PENDENTES'},
-        {type: 'qtd_just_anexo', label: 'MTO'},
-        {type: 'qtd_just_anexo', label: 'MTO FAIL'},
-        {type: 'qtd_just_anexo', label: 'CHECKED'},
-        {type: 'qtd_just_anexo', label: 'PEÇAS AGUARDANDO TRATATIVAS'},
-        {type: 'sim_nao_just_anexo', label: 'OPA'}
-      ],
-      QUALIDADE: [
-        {type: 'header', label: 'ABERTURA DE TURNO'},
-        {type: 'qtd_just_anexo', label: 'HC ESPERADOS'},
-        {type: 'qtd_just_anexo', label: 'HC PRESENTES'},
-        {type: 'qtd_just_anexo', label: 'HC AUSENTES'},
-        {type: 'perc_just_anexo', label: 'ABS'},
+<div class="hero-card">
 
-        {type: 'header', label: 'EQUIPAMENTOS'},
-        {type: 'qtd_just_anexo', label: 'NOTEBOOK'},
-        {type: 'qtd_just_anexo', label: 'PDA'},
-        {type: 'qtd_just_anexo', label: 'RÁDIO'},
+<h2>QUALIDADE OPERACIONAL</h2>
 
-        {type: 'header', label: 'ROTINA SUPERVISORES'},
-        {type: 'toggle_just', label: 'DDSMA'},
-        {type: 'toggle_just', label: 'DDQA'},
-        {type: 'toggle_just', label: 'CUIDADO ATIVO'},
-        {type: 'toggle_just', label: 'SAFETY WALK'},
-        {type: 'toggle_just', label: '5S (Área Avarias / Qualidade)'},
-        {type: 'toggle_just', label: 'OPA'},
-        {type: 'toggle_just', label: 'OPA (PLANO DE AÇÃO)'},
+<p>
+Sistema premium de passagem de turno com visual executivo, captura de evidências, geração automática de CARD PNG ultra visual e dashboard operacional completo.
+</p>
 
-        {type: 'header', label: 'AVARIAS'},
-        {type: 'responsavel_single', label: 'AVARIAS - RESPONSÁVEL'},
-        {type: 'qtd_just_anexo', label: 'QUANTIDADE RECOLHIDAS'},
-        {type: 'qtd_just_anexo', label: 'AVARIAS TRATADAS'},
-        {type: 'qtd_just_anexo', label: 'BACKLOG AVARIAS'},
-        {type: 'meta_real_just_anexo', label: 'RETURNS'},
-        {type: 'responsavel_single', label: 'RETURNS - RESPONSÁVEL'},
-        {type: 'qtd_just_anexo', label: 'RETURNS BACKLOG'},
+</div>
 
-        {type: 'header', label: 'RESPONSABILIDADE RR'},
-        {type: 'responsavel_single', label: 'RR - RESPONSÁVEL'},
-        {type: 'qtd_just_anexo', label: 'RR QUANTIDADE'},
-        {type: 'date_single', label: 'RR Reference Day'},
-        {type: 'date_single', label: 'Outbound Time'},
-        {type: 'qtd_single', label: 'OB Orders D-1'},
-        {type: 'qtd_single', label: 'RR Orders D-1'},
-        {type: 'perc_single', label: 'RR Rate D-1'},
-        {type: 'perc_single', label: 'RR Rate D-2'},
-        {type: 'perc_single', label: 'RR Rate D-3'},
-        {type: 'perc_single', label: 'RR 7 Rolling Days'},
-        {type: 'toggle_just', label: 'RR (Plano de Ação)'},
+<form id="formEOS">
 
-        {type: 'header', label: 'TREINAMENTOS'},
-        {type: 'qtd_responsavel', label: 'CAPACITAÇÃO/ONBOARDING'},
-        {type: 'qtd_responsavel', label: 'RECICLAGEM'},
-        {type: 'just_single', label: 'ANÁLISE LC PRODUTIVIDADE'},
-        {type: 'responsavel_single', label: 'REVISÃO MATERIAL'},
+<div class="card">
 
-        {type: 'header', label: 'AUDITORIAS'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA DOCA INB'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA BOXING'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA PUTAWAY'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA PICKING'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA DEVICE'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA CHECKING'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA MERGE'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA SHIPPING'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA DOCA OUT'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA 5S'},
-        {type: 'qtd_just_anexo', label: 'TOTAL DE AUDITORIAS'},
+<div class="section-title">
+<div class="bar"></div>
+<h3>Informações de Identificação</h3>
+</div>
 
-        {type: 'header', label: 'CUBISCAN PE'},
-        {type: 'qtd_just_anexo', label: 'CORREÇÃO REALIZADA'},
-        {type: 'qtd_just_anexo', label: 'NÃO IDENTIFICADO'},
-        {type: 'qtd_just_anexo', label: 'BACKLOG CUBISCAN'},
-        {type: 'just_anexo_clean', label: 'OBSERVAÇÕES DO TURNO'}
-      ]
-    };
+<div class="grid-ident">
 
-    function renderFields() {
-      const area = document.getElementById('areaSelect').value;
-      const container = document.getElementById('container_areas');
-      container.innerHTML = "";
-      if(!area || !config[area]) return;
+<div class="field">
+<label>CD Operacional</label>
+<select class="input" id="cd">
+<option>JABOATÃO - BRPE1</option>
+<option>FRANCO 1 - BRSP1</option>
+<option>FRANCO 2 - BRSP2</option>
+<option>CONTAGEM - BRMG1</option>
+<option>HIDROLÂNDIA - BRGO1</option>
+<option>NOVA SANTA RITA - BRRS1</option>
+</select>
+</div>
 
-      let html = `<div class="card-master"><div class="section-title">Indicadores Operacionais | ${area}</div>`;
+<div class="field">
+<label>Responsável</label>
+<input class="input" id="responsavel" placeholder="Nome responsável">
+</div>
 
-      config[area].forEach((item, idx) => {
-        const id = `${area.replace(/\s+/g, '_')}_${idx}`;
-        const prefix = `${area.replace(/\s+/g, '_')}_${item.label.replace(/\s+/g, '_')}`;
+<div class="field">
+<label>Cargo</label>
+<input class="input" id="cargo" placeholder="Cargo">
+</div>
 
-        if (item.type === 'header') {
-          html += `<div class="sub-section-header">${item.label}</div>`;
-        }
-        else if (item.type === 'meta_real_perc_anexo') {
-          html += `<div class="grid-row-dmo">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div><input type="number" id="meta_${id}" name="${prefix}_META" class="input-premium text-center" placeholder="Meta"></div>
-            <div><input type="number" id="real_${id}" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real" oninput="calcPerc('${id}')"></div>
-            <div><input type="text" id="perc_${id}" name="${prefix}_PERC" class="input-premium bg-gray-100 text-center font-bold text-orange-600" placeholder="%" readonly></div>
-            <div class="flex gap-2">
-               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border flex-1 text-[10px] font-bold h-[48px]">ANEXO</button>
-               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'meta_real_just_anexo') {
-          html += `<div class="grid-row-dmo">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div><input type="number" name="${prefix}_META" class="input-premium text-center" placeholder="Meta"></div>
-            <div><input type="number" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
-            <div class="flex gap-2">
-               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border flex-1 text-[10px] font-bold h-[48px]">ANEXO</button>
-               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'sim_nao_anexo') {
-          html += `<div class="grid-row-compact">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div class="flex gap-1">
-              <button type="button" onclick="setToggle(this, '${id}_v', 'SIM')" class="btn-toggle text-xs">SIM</button>
-              <button type="button" onclick="setToggle(this, '${id}_v', 'NÃO')" class="btn-toggle text-xs">NÃO</button>
-              <input type="hidden" id="${id}_v" name="${prefix}_STATUS">
-            </div>
-            <div class="flex gap-2">
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border flex-1 text-[10px] font-bold h-[48px]">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'toggle_just') {
-          html += `<div class="grid-row-item">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div class="flex gap-1">
-              <button type="button" onclick="setToggle(this, '${id}_v', 'SIM')" class="btn-toggle text-xs">SIM</button>
-              <button type="button" onclick="setToggle(this, '${id}_v', 'NÃO')" class="btn-toggle text-xs">NÃO</button>
-              <input type="hidden" id="${id}_v" name="${prefix}_STATUS">
-            </div>
-            <div class="col-span-2 flex gap-2">
-              <input type="text" name="${prefix}_JUST" class="input-premium flex-1" placeholder="Justificativa">
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border text-[10px] font-bold">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'relogio_just_anexo') {
-          html += `<div class="grid-row-item">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div><input type="time" name="${prefix}_HORA" class="input-premium"></div>
-            <div class="col-span-2 flex gap-2">
-              <input type="text" name="${prefix}_JUST" class="input-premium flex-1" placeholder="Justificativa">
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border text-[10px] font-bold">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'meta_fixa_just_anexo') {
-          html += `<div class="grid-row-item">
-            <div class="font-bold text-gray-700 text-sm">${item.label} <span class="block text-[9px] text-orange-500">META: ${item.fixed}</span></div>
-            <div><input type="text" name="${prefix}_REAL" class="input-premium" placeholder="Real"></div>
-            <div class="col-span-2 flex gap-2">
-              <input type="text" name="${prefix}_JUST" class="input-premium flex-1" placeholder="Justificativa">
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border text-[10px] font-bold">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'plano_real_anexo') {
-          html += `<div class="grid-row-item">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div><input type="number" name="${prefix}_PLANO" class="input-premium" placeholder="Plano"></div>
-            <div><input type="number" name="${prefix}_REAL" class="input-premium" placeholder="Real"></div>
-            <div class="flex gap-2">
-               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border flex-1 text-[10px] font-bold h-[48px]">ANEXO</button>
-               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'idle_custom') {
-          html += `<div class="grid-row-idle">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div><input type="text" name="${prefix}_IDLE" class="input-premium" placeholder="IDLE"></div>
-            <div><input type="number" name="${prefix}_REAL" class="input-premium" placeholder="Real"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
-            <div class="flex gap-2">
-               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border flex-1 text-[10px] font-bold">ANEXO</button>
-               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'qtd_real_anexo') {
-          html += `<div class="grid-row-item">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div><input type="number" name="${prefix}_QTD" class="input-premium" placeholder="Quantidade"></div>
-            <div><input type="number" name="${prefix}_REAL" class="input-premium" placeholder="Real"></div>
-            <div class="flex gap-2">
-               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border flex-1 text-[10px] font-bold">ANEXO</button>
-               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'real_just_anexo') {
-          html += `<div class="grid-row-item">
-            <div class="font-bold text-gray-700 text-sm">${item.label} <span class="block text-[9px] text-gray-400">${item.desc || ''}</span></div>
-            <div><input type="number" name="${prefix}_REAL" class="input-premium" placeholder="Real"></div>
-            <div class="col-span-2 flex gap-2">
-              <input type="text" name="${prefix}_JUST" class="input-premium flex-1" placeholder="Justificativa">
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border text-[10px] font-bold">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'sim_nao_just_anexo') {
-          html += `<div class="grid-row-item">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div class="flex gap-1">
-              <button type="button" onclick="setToggle(this, '${id}_v', 'SIM')" class="btn-toggle text-xs">SIM</button>
-              <button type="button" onclick="setToggle(this, '${id}_v', 'NÃO')" class="btn-toggle text-xs">NÃO</button>
-              <input type="hidden" id="${id}_v" name="${prefix}_STATUS" required>
-            </div>
-            <div class="col-span-2 flex gap-2">
-              <input type="text" name="${prefix}_JUST" class="input-premium flex-1" placeholder="Justificativa">
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border text-[10px] font-bold">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'perc_just_anexo') {
-          html += `<div class="grid-row-item">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div><input type="text" name="${prefix}_PORCENTAGEM" class="input-premium" placeholder="%"></div>
-            <div class="col-span-2 flex gap-2">
-              <input type="text" name="${prefix}_JUST" class="input-premium flex-1" placeholder="Justificativa">
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border text-[10px] font-bold">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'responsavel_single') {
-          html += `<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end padding: 16px 0; border-bottom: 1px solid #f1f5f9; py-3">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div class="md:col-span-3"><input type="text" name="${prefix}_RESPONSAVEL" class="input-premium" placeholder="Nome do Responsável"></div>
-          </div>`;
-        }
-        else if (item.type === 'date_single') {
-          html += `<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end padding: 16px 0; border-bottom: 1px solid #f1f5f9; py-3">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div class="md:col-span-3"><input type="date" name="${prefix}_DATA" class="input-premium"></div>
-          </div>`;
-        }
-        else if (item.type === 'qtd_single') {
-          html += `<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end padding: 16px 0; border-bottom: 1px solid #f1f5f9; py-3">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div class="md:col-span-3"><input type="number" name="${prefix}_QTD" class="input-premium" placeholder="Quantidade"></div>
-          </div>`;
-        }
-        else if (item.type === 'perc_single') {
-          html += `<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end padding: 16px 0; border-bottom: 1px solid #f1f5f9; py-3">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div class="md:col-span-3"><input type="text" name="${prefix}_PERC" class="input-premium" placeholder="%"></div>
-          </div>`;
-        }
-        else if (item.type === 'just_single') {
-          html += `<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end padding: 16px 0; border-bottom: 1px solid #f1f5f9; py-3">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div class="md:col-span-3"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
-          </div>`;
-        }
-        else if (item.type === 'qtd_responsavel') {
-          html += `<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end padding: 16px 0; border-bottom: 1px solid #f1f5f9; py-3">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div><input type="number" name="${prefix}_QTD" class="input-premium" placeholder="Quantidade"></div>
-            <div class="md:col-span-2"><input type="text" name="${prefix}_RESPONSAVEL" class="input-premium" placeholder="Nome do Responsável"></div>
-          </div>`;
-        }
-        else if (item.type === 'just_anexo_clean') {
-          html += `<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end padding: 16px 0; border-bottom: 1px solid #f1f5f9; py-3">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div class="md:col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Observações/Justificativa"></div>
-            <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border w-full text-[10px] font-bold h-[48px]">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else {
-          html += `<div class="grid-row-item">
-            <div class="font-bold text-gray-700 text-sm">${item.label}</div>
-            <div><input type="number" name="${prefix}_QTD" class="input-premium" placeholder="Qtd"></div>
-            <div class="col-span-2 flex gap-2">
-              <input type="text" name="${prefix}_JUST" class="input-premium flex-1" placeholder="Justificativa">
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-gray-200 px-3 rounded-lg border text-[10px] font-bold">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-      });
-      container.innerHTML = html + `</div>`;
-    }
+<div class="field">
+<label>Turno</label>
+<select class="input" id="turno">
+<option>T1</option>
+<option>T2</option>
+<option>T3</option>
+<option>T4</option>
+<option>T5</option>
+<option>T6</option>
+<option>T7</option>
+</select>
+</div>
 
-    function calcPerc(id) {
-      const meta = parseFloat(document.getElementById(`meta_${id}`).value);
-      const real = parseFloat(document.getElementById(`real_${id}`).value);
-      const percInput = document.getElementById(`perc_${id}`);
-      if(meta > 0 && real >= 0) {
-        const p = (real / meta) * 100;
-        percInput.value = p.toFixed(1) + "%";
-      } else { percInput.value = ""; }
-    }
+</div>
 
-    function setToggle(btn, inputId, val) {
-      btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active-sim', 'active-nao'));
-      btn.classList.add(val === 'SIM' ? 'active-sim' : 'active-nao');
-      document.getElementById(inputId).value = val;
-    }
+</div>
 
-    function handleFileUpload(input, id) {
-      if (input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = new Image();
-          img.onload = () => {
-            const c = document.getElementById('photoCanvas');
-            const ctx = c.getContext('2d');
-            const maxWidth = 800;
-            const scale = maxWidth / img.width; 
-            c.width = maxWidth; 
-            c.height = img.height * scale;
-            ctx.drawImage(img, 0, 0, c.width, c.height);
-            
-            if(id === 'final') {
-                document.getElementById('data_final').value = c.toDataURL('image/jpeg', 0.8);
-                const btn = document.getElementById('btn_file_final');
-                btn.classList.add('btn-attached');
-                btn.innerHTML = "✅ FOTO ANEXADA";
-            } else {
-                const btn = document.getElementById(`btn_file_${id}`);
-                btn.classList.add('btn-attached');
-                btn.innerHTML = "✅ OK";
-            }
-          };
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
+<div class="card">
 
-    async function baixarRelatorio() {
-      const { jsPDF } = window.jspdf;
-      const element = document.getElementById('report-content');
-      element.classList.add('hide-for-pdf');
+<div class="section-title">
+<div class="bar"></div>
+<h3>Abertura de Turno</h3>
+</div>
 
-      try {
-        const canvas = await html2canvas(element, { scale: 2 });
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save(`Relatorio_Qualidade_${new Date().toLocaleDateString()}.pdf`);
-      } catch (err) {
-        alert("Erro ao gerar PDF.");
-      } finally {
-        element.classList.remove('hide-for-pdf');
-      }
-    }
+<div id="abertura"></div>
 
-    function enviarDados() {
-      const btnText = document.getElementById('btnText');
-      const btnSpinner = document.getElementById('btnSpinner');
-      const btnEnviar = document.getElementById('btnEnviar');
-      
-      btnText.innerText = "Enviando dados...";
-      btnSpinner.style.display = "block";
-      btnEnviar.disabled = true;
+</div>
 
-      setTimeout(() => {
-        btnText.innerText = "Finalizar e Enviar Relatório";
-        btnSpinner.style.display = "none";
-        btnEnviar.disabled = false;
-        document.getElementById('success-modal').style.display = "flex";
-      }, 2000);
-    }
-  </script>
+<div class="card">
+
+<div class="section-title">
+<div class="bar"></div>
+<h3>Equipamentos</h3>
+</div>
+
+<div id="equipamentos"></div>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">
+<div class="bar"></div>
+<h3>Rotina Supervisores</h3>
+</div>
+
+<div id="rotina"></div>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">
+<div class="bar"></div>
+<h3>Avarias</h3>
+</div>
+
+<div id="avarias"></div>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">
+<div class="bar"></div>
+<h3>Responsabilidade RR</h3>
+</div>
+
+<div id="rr"></div>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">
+<div class="bar"></div>
+<h3>Treinamentos</h3>
+</div>
+
+<div id="treinamentos"></div>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">
+<div class="bar"></div>
+<h3>Auditorias</h3>
+</div>
+
+<div id="auditorias"></div>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">
+<div class="bar"></div>
+<h3>Cubiscan PE</h3>
+</div>
+
+<div id="cubiscan"></div>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">
+<div class="bar"></div>
+<h3>Observações do Turno</h3>
+</div>
+
+<textarea class="input" id="obs" placeholder="Descreva informações importantes do turno..."></textarea>
+
+</div>
+
+<div class="footer-buttons">
+
+<button type="button" class="btn-main btn-download" onclick="baixarPNG()">
+📸 GERAR CARD PNG
+</button>
+
+<button type="button" class="btn-main btn-submit" onclick="gerarCard()">
+🚀 ATUALIZAR CARD EXECUTIVO
+</button>
+
+</div>
+
+</form>
+
+<div class="preview-card" id="cardPNG">
+
+<div class="preview-header">
+
+<h2>EOS-BR QUALITY REPORT</h2>
+
+<span id="previewDate"></span>
+
+</div>
+
+<div class="preview-grid">
+
+<div class="preview-box">
+<h4>CD OPERACIONAL</h4>
+<p id="prev_cd">-</p>
+</div>
+
+<div class="preview-box">
+<h4>RESPONSÁVEL</h4>
+<p id="prev_resp">-</p>
+</div>
+
+<div class="preview-box">
+<h4>CARGO / TURNO</h4>
+<p id="prev_turno">-</p>
+</div>
+
+<div class="preview-box">
+<h4>OBSERVAÇÕES</h4>
+<p id="prev_obs">-</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+setInterval(()=>{
+document.getElementById('clock').innerHTML=new Date().toLocaleTimeString('pt-BR');
+},1000);
+
+const sections = {
+
+abertura:[
+'HC ESPERADOS',
+'HC PRESENTES',
+'HC AUSENTES',
+'ABS'
+],
+
+equipamentos:[
+'NOTEBOOK',
+'PDA',
+'RÁDIO'
+],
+
+rotina:[
+'DDSMA',
+'DDQA',
+'CUIDADO ATIVO',
+'SAFETY WALK',
+'5S (Área Avarias / Qualidade)',
+'OPA',
+'OPA (PLANO DE AÇÃO)'
+],
+
+avarias:[
+'QUANTIDADE RECOLHIDAS',
+'AVARIAS TRATADAS',
+'BACKLOG',
+'RETURNS',
+'BACKLOG'
+],
+
+rr:[
+'RR',
+'RR Reference Day',
+'Outbound Time',
+'OB Orders D-1',
+'RR Orders D-1',
+'RR Rate D-1',
+'RR Rate D-2',
+'RR Rate D-3',
+'RR 7 Rolling Days',
+'RR (Plano de Ação)'
+],
+
+treinamentos:[
+'CAPACITAÇÃO/ONBOARDING',
+'RECICLAGEM',
+'ANÁLISE LC PRODUTIVIDADE',
+'REVISÃO MATERIAL'
+],
+
+auditorias:[
+'AUDITORIA DOCA INB',
+'AUDITORIA BOXING',
+'AUDITORIA PUTAWAY',
+'AUDITORIA PICKING',
+'AUDITORIA DEVICE',
+'AUDITORIA CHECKING',
+'AUDITORIA MERGE',
+'AUDITORIA SHIPPING',
+'AUDITORIA DOCA OUT',
+'AUDITORIA 5S',
+'TOTAL DE AUDITORIAS'
+],
+
+cubiscan:[
+'CORREÇÃO REALIZADA',
+'NÃO IDENTIFICADO',
+'BACKLOG CUBSCAN'
+]
+
+};
+
+function createRows(target,array){
+
+let html='';
+
+array.forEach((item,index)=>{
+
+html+=`
+<div class="big-grid">
+
+<div class="item-title">${item}</div>
+
+<input class="input" placeholder="Quantidade / Meta / Real">
+
+<input class="input" placeholder="Justificativa">
+
+<button type="button" class="btn-file">📎 ANEXO</button>
+
+</div>
+`;
+
+});
+
+document.getElementById(target).innerHTML=html;
+
+}
+
+createRows('abertura',sections.abertura);
+createRows('equipamentos',sections.equipamentos);
+createRows('rotina',sections.rotina);
+createRows('avarias',sections.avarias);
+createRows('rr',sections.rr);
+createRows('treinamentos',sections.treinamentos);
+createRows('auditorias',sections.auditorias);
+createRows('cubiscan',sections.cubiscan);
+
+function gerarCard(){
+
+document.getElementById('prev_cd').innerText=document.getElementById('cd').value;
+
+document.getElementById('prev_resp').innerText=document.getElementById('responsavel').value || '-';
+
+document.getElementById('prev_turno').innerText=
+(document.getElementById('cargo').value || '-') + ' | ' +
+document.getElementById('turno').value;
+
+document.getElementById('prev_obs').innerText=
+document.getElementById('obs').value || '-';
+
+document.getElementById('previewDate').innerText=
+new Date().toLocaleString('pt-BR');
+
+}
+
+async function baixarPNG(){
+
+const element=document.getElementById('cardPNG');
+
+const canvas=await html2canvas(element,{
+scale:3,
+useCORS:true
+});
+
+const link=document.createElement('a');
+
+link.download=`EOS-BR-${Date.now()}.png`;
+
+link.href=canvas.toDataURL('image/png');
+
+link.click();
+
+}
+
+</script>
+
 </body>
 </html>
