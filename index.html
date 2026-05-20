@@ -239,7 +239,6 @@
                 <option value="BRMG1">BRMG1</option>
                 <option value="BRRS1">BRRS1</option>
                 <option value="BRGO1">BRGO1</option>
-                <option value="BRGO1">BRGO1</option>
               </select>
             </div>
             <div>
@@ -322,8 +321,6 @@
       document.getElementById('clock').innerText = new Date().toLocaleTimeString('pt-BR');
     }, 1000);
     
-    document.getElementById('card-date-now').innerText = new Date().toLocaleDateString('pt-BR');
-
     // Configuração de Campos por Área
     const config = {
       INBOUND: [
@@ -499,17 +496,7 @@
 
     // Atualização dinâmica do Card Informativo
     function updateInfoCard() {
-      document.getElementById('sum-cd').innerText = document.getElementById('cd_operacional').value || '-';
-      document.getElementById('sum-resp').innerText = document.getElementById('responsavel').value || '-';
-      
-      const cargo = document.getElementById('cargo').value;
-      const turno = document.getElementById('turno').value;
-      document.getElementById('sum-turno-cargo').innerText = (turno || cargo) ? `${turno} | ${cargo}` : '-';
-      
-      document.getElementById('sum-area').innerText = document.getElementById('areaSelect').value || '-';
-      
-      const obs = document.getElementById('justificativa_final').value;
-      document.getElementById('sum-obs').innerText = obs ? obs : "Nenhuma observação ou desafio relatado até o momento.";
+      // Função mantida para compatibilidade com eventos onchange/oninput
     }
 
     function renderFields() {
@@ -596,7 +583,268 @@
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
-        });
+        }
+        else if (item.type === 'idle_custom') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="grid grid-cols-2 gap-1">
+              <input type="time" name="${prefix}_DE" class="input-premium text-center">
+              <input type="time" name="${prefix}_ATE" class="input-premium text-center">
+            </div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Motivo do Idle"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'qtd_just_anexo' || item.type === 'real_just_anexo') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm flex flex-col">
+              <span>${item.label}</span>
+              ${item.desc ? `<span class="text-[10px] font-normal text-slate-400 -mt-0.5">${item.desc}</span>` : ''}
+            </div>
+            <div><input type="number" name="${prefix}_QTD" class="input-premium text-center" placeholder="Qtd"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa/Obs"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'meta_fixa_just_anexo') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="grid grid-cols-2 gap-1">
+              <div class="bg-slate-100 border border-slate-200 text-slate-500 rounded-lg flex items-center justify-center text-xs font-bold h-[38px]">${item.fixed}</div>
+              <input type="text" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real">
+            </div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'plano_real_anexo') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="grid grid-cols-2 gap-1">
+              <input type="number" name="${prefix}_PLANO" class="input-premium text-center" placeholder="Plano">
+              <input type="number" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real">
+            </div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'qtd_real_anexo') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="grid grid-cols-2 gap-1">
+              <input type="number" name="${prefix}_QTD" class="input-premium text-center" placeholder="Qtd">
+              <input type="number" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real">
+            </div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'perc_just_anexo' || item.type === 'input_perc_just_anexo') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="text" name="${prefix}_PERC" class="input-premium text-center" placeholder="%"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_text_only') {
+          html += `<div class="unified-grid-row" style="grid-template-columns: 2fr 3.5fr 0.8fr;">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="text" name="${prefix}_TEXTO" class="input-premium" placeholder="Digite as informações"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'meta_real_just_anexo') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="grid grid-cols-2 gap-1">
+              <input type="number" name="${prefix}_META" class="input-premium text-center" placeholder="Meta">
+              <input type="number" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real">
+            </div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_date_just_anexo') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="date" name="${prefix}_DATA" class="input-premium text-center"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_number_just_anexo') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="number" name="${prefix}_NÚMERO" class="input-premium text-center" placeholder="Qtd"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_just_only') {
+          html += `<div class="unified-grid-row" style="grid-template-columns: 2fr 3.5fr 0.8fr;">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="text" name="${prefix}_ANALISE" class="input-premium" placeholder="Digite a análise"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_just_anexo_only') {
+          html += `<div class="unified-grid-row" style="grid-template-columns: 2fr 3.5fr 0.8fr;">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="text" name="${prefix}_OBS" class="input-premium" placeholder="Digite as observações"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+      });
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function setToggle(btn, inputId, val) {
+      const container = btn.parentElement;
+      container.querySelectorAll('.btn-toggle').forEach(b => {
+        b.classList.remove('active-sim', 'active-nao');
+      });
+      
+      if(val === 'SIM') btn.classList.add('active-sim');
+      else btn.classList.add('active-nao');
+      
+      document.getElementById(inputId).value = val;
+    }
+
+    function calcPerc(id) {
+      const m = parseFloat(document.getElementById(`meta_${id}`).value);
+      const r = parseFloat(document.getElementById(`real_${id}`).value);
+      if(m && r) {
+        const p = ((r / m) * 100).toFixed(1);
+        document.getElementById(`perc_${id}`).value = `${p}%`;
+      } else {
+        document.getElementById(`perc_${id}`).value = '';
+      }
+    }
+
+    function handleFileUpload(input, id) {
+      if(input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          if(id === 'final') {
+            document.getElementById('data_final').value = e.target.result;
+            document.getElementById('btn_file_final').classList.add('btn-attached');
+            document.getElementById('btn_file_final').innerText = '✅ IMAGEM ANEXADA';
+          } else {
+            const hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = `FOTO_${id}`;
+            hidden.value = e.target.result;
+            input.parentElement.appendChild(hidden);
+            
+            const btn = document.getElementById(`btn_file_${id}`);
+            btn.classList.add('btn-attached');
+            btn.innerText = 'FIXADO';
+          }
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function enviarDados() {
+      const form = document.getElementById('eosForm');
+      if(!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      document.getElementById('btnText').innerText = "Processando e Enviando...";
+      document.getElementById('btnSpinner').style.display = "block";
+      document.getElementById('btnEnviar').disabled = true;
+
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
+
+      fetch('https://api.sheetmonkey.io/2/form/vS9NscvJvQpUv9mH6Yw2N6', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        document.getElementById('success-modal').style.display = 'flex';
+      })
+      .catch(err => {
+        alert('Erro ao enviar relatório. Tente novamente.');
+        console.error(err);
+      })
+      .finally(() => {
+        document.getElementById('btnText').innerText = "Finalizar e Enviar Relatório";
+        document.getElementById('btnSpinner').style.display = "none";
+        document.getElementById('btnEnviar').disabled = false;
+      });
+    }
+
+    function baixarRelatorio() {
+      const element = document.getElementById('report-content');
+      
+      // Remove botões temporariamente para o snapshot limpo
+      const btns = element.querySelectorAll('button');
+      const textareas = element.querySelectorAll('textarea');
+      const selects = element.querySelectorAll('select');
+      const inputs = element.querySelectorAll('input');
+      
+      element.classList.add('canvas-snapshot');
+
+      // Preserva valores dos inputs no DOM para renderização correta
+      selects.forEach(s => { s.setAttribute('data-val', s.value); });
+      inputs.forEach(i => { i.setAttribute('data-val', i.value); });
+
+      html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#f5f7fb',
+        windowWidth: 1200
+      }).then(canvas => {
+        element.classList.remove('canvas-snapshot');
+        const link = document.createElement('a');
+        link.download = `EOS_BR_PassagemTurno_${new Date().toISOString().split('T')[0]}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
     }
   </script>
 </body>
