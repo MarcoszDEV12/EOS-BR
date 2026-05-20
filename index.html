@@ -74,7 +74,6 @@
       border-radius: 3px;
     }
 
-    /* Subtítulos de Destaque dentro da Qualidade */
     .quality-sub-header {
       font-size: 11px;
       font-weight: 900;
@@ -157,7 +156,6 @@
       background: linear-gradient(95deg, #0f172a, #020617);
     }
 
-    /* Estrutura Unificada Grid para Alinhamento Perfeito de Linhas */
     .unified-grid-row {
       display: grid;
       gap: 12px;
@@ -200,16 +198,6 @@
       color: white !important;
       box-shadow: 0 3px 8px rgba(16, 185, 129, 0.15);
     }
-
-    .canvas-snapshot .input-premium {
-      background: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #000000 !important;
-    }
-    
-    .canvas-snapshot .btn-toggle:not(.active-sim):not(.active-nao) {
-      opacity: 0.4;
-    }
   </style>
 </head>
 <body>
@@ -235,7 +223,7 @@
               <label class="text-[10px] font-black text-slate-500 mb-1 block uppercase tracking-wider">CD Operacional</label>
               <select name="cd_operacional" class="input-premium" required>
                 <option value="">Selecione...</option>
-                <option value="BRPE1">BRPE1</option>
+                <option value="BRPE1">BRPE1 (Recife)</option>
                 <option value="BRSP1">BRSP1</option>
                 <option value="BRSP2">BRSP2</option>
                 <option value="BRMG1">BRMG1</option>
@@ -286,6 +274,39 @@
 
         <div id="container_areas"></div>
 
+        <div class="card-master bg-gradient-to-br from-slate-900 to-slate-950 text-white relative border-none">
+          <div class="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="Shopee" class="w-32 brightness-0 invert">
+          </div>
+          <div class="text-orange-500 font-black text-xs uppercase tracking-widest mb-1 flex items-center gap-1">
+            <span>⚡ SUMMARY STATUS</span> • <span>DDSMA & DDQA GARANTIDOS</span>
+          </div>
+          <h3 class="text-lg font-black tracking-tight mb-4">CONDIÇÕES GERAIS DA PASSAGEM</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-white/5 border border-white/10 p-3 rounded-xl backdrop-blur-sm">
+              <div class="text-[10px] uppercase font-bold text-slate-400">Segurança & Meio Ambiente</div>
+              <div class="text-sm font-extrabold text-emerald-400 mt-1 flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span> DDSMA Executado 100%
+              </div>
+            </div>
+            <div class="bg-white/5 border border-white/10 p-3 rounded-xl backdrop-blur-sm">
+              <div class="text-[10px] uppercase font-bold text-slate-400">Qualidade Aplicada</div>
+              <div class="text-sm font-extrabold text-orange-400 mt-1 flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-orange-500 inline-block"></span> Alinhamento DDQA Ativo
+              </div>
+            </div>
+            <div class="bg-white/5 border border-white/10 p-3 rounded-xl backdrop-blur-sm">
+              <div class="text-[10px] uppercase font-bold text-slate-400">Metas Operacionais</div>
+              <div class="text-sm font-extrabold text-blue-400 mt-1">Acompanhamento Real vs Plano</div>
+            </div>
+            <div class="bg-white/5 border border-white/10 p-3 rounded-xl backdrop-blur-sm">
+              <div class="text-[10px] uppercase font-bold text-slate-400">Evidências Técnicas</div>
+              <div class="text-sm font-extrabold text-purple-400 mt-1">Anexos Vinculados por Grid</div>
+            </div>
+          </div>
+        </div>
+
         <div class="card-master">
           <div class="section-title">Conclusão e Evidências</div>
           <textarea name="JUSTIFICATIVA_FINAL" class="input-premium h-24 mb-4 py-2 resize-none block" placeholder="Relate aqui os principais desafios, gargalos ou recados para o próximo turno..."></textarea>
@@ -322,8 +343,15 @@
       document.getElementById('clock').innerText = new Date().toLocaleTimeString('pt-BR');
     }, 1000);
 
+    // Estrutura global de segurança injetada dinamicamente
+    const globalSafety = [
+      {type: 'toggle_just', label: 'DDSMA'},
+      {type: 'toggle_just', label: 'DDQA'}
+    ];
+
     const config = {
       INBOUND: [
+        ...globalSafety,
         {type: 'sim_nao_just_anexo', label: 'DDS'},
         {type: 'qtd_just_anexo', label: 'RECEBIMENTO'},
         {type: 'qtd_just_anexo', label: 'LH'},
@@ -335,6 +363,7 @@
         {type: 'toggle_just', label: 'OPA'}
       ],
       "PICKING LEVE": [
+        ...globalSafety,
         {type: 'sim_nao_just_anexo', label: 'DDS'},
         {type: 'meta_real_perc_anexo', label: 'META DMO'},
         {type: 'qtd_just_anexo', label: 'REIMPRESSÃO DE ENDEREÇO'},
@@ -345,6 +374,7 @@
         {type: 'sim_nao_just_anexo', label: 'OPA'}
       ],
       "PICKING VOL": [
+        ...globalSafety,
         {type: 'sim_nao_just_anexo', label: 'DDS'},
         {type: 'meta_real_perc_anexo', label: 'META DMO'},
         {type: 'qtd_just_anexo', label: 'REIMPRESSÃO DE ENDEREÇO'},
@@ -355,6 +385,7 @@
         {type: 'sim_nao_just_anexo', label: 'OPA'}
       ],
       "CHECKING LEVE": [
+        ...globalSafety,
         {type: 'sim_nao_just_anexo', label: 'DDS'},
         {type: 'meta_real_perc_anexo', label: 'META DMO'},
         {type: 'qtd_just_anexo', label: 'SOBRAS'},
@@ -365,6 +396,7 @@
         {type: 'sim_nao_just_anexo', label: 'OPA'}
       ],
       "CHECKING VOL": [
+        ...globalSafety,
         {type: 'sim_nao_just_anexo', label: 'DDS'},
         {type: 'meta_real_perc_anexo', label: 'META DMO'},
         {type: 'qtd_just_anexo', label: 'SOBRAS'},
@@ -375,6 +407,7 @@
         {type: 'sim_nao_just_anexo', label: 'OPA'}
       ],
       SHIPPING: [
+        ...globalSafety,
         {type: 'sim_nao_just_anexo', label: 'DDS'},
         {type: 'meta_fixa_just_anexo', label: 'SLA TRANSPORTING', fixed: '99%'},
         {type: 'qtd_just_anexo', label: 'PROD. TO PACKING - ESTEIRA (1) PEQ.'},
@@ -387,6 +420,7 @@
         {type: 'sim_nao_just_anexo', label: 'OPA'}
       ],
       INVENTARIO: [
+        ...globalSafety,
         {type: 'qtd_just_anexo', label: 'ESTOQUE ATUAL DE AV'},
         {type: 'qtd_just_anexo', label: 'ESTOQUE ATUAL DE DEM'},
         {type: 'qtd_just_anexo', label: 'ESTOQUE ATUAL GERAL'},
@@ -400,6 +434,7 @@
         {type: 'sim_nao_just_anexo', label: 'OPA'}
       ],
       IBT: [
+        ...globalSafety,
         {type: 'qtd_just_anexo', label: 'PEÇAS TRATADAS NO DIA'},
         {type: 'qtd_just_anexo', label: 'SURPLUS'},
         {type: 'qtd_just_anexo', label: 'SHORTAGES'},
@@ -445,20 +480,22 @@
         {type: 'section_header', label: 'RESPONSABILIDADE RR'},
         {type: 'input_text_only', label: 'RR - NOME RESPONSÁVEL'},
         {type: 'qtd_just_anexo', label: 'RR'},
-        {type: 'relogio_just_anexo', label: 'RR Reference Day'},
+        
+        // UPGRADE REALIZADO: Campos de qualidade com Justificativa e Anexo ativados
+        {type: 'relogio_just_anexo', label: 'RR Reference Day'}, 
         {type: 'relogio_just_anexo', label: 'Outbound Time'},
-        {type: 'qtd_just_anexo', label: 'OB Orders D-1'},
-        {type: 'qtd_just_anexo', label: 'RR Orders D-1'},
-        {type: 'real_just_anexo', label: 'RR Rate D-1'},
-        {type: 'real_just_anexo', label: 'RR Rate D-2'},
-        {type: 'real_just_anexo', label: 'RR Rate D-3'},
-        {type: 'real_just_anexo', label: 'RR 7 Rolling Days'},
+        {type: 'meta_real_perc_anexo', label: 'OB Orders D-1'},
+        {type: 'meta_real_perc_anexo', label: 'RR Orders D-1'},
+        {type: 'meta_real_perc_anexo', label: 'RR Rate D-1'},
+        {type: 'meta_real_perc_anexo', label: 'RR Rate D-2'},
+        {type: 'meta_real_perc_anexo', label: 'RR Rate D-3'},
+        {type: 'meta_real_perc_anexo', label: 'RR 7 Rolling Days'},
         {type: 'toggle_just', label: 'RR (Plano de Ação)'},
         
         {type: 'section_header', label: 'TREINAMENTOS'},
-        {type: 'qtd_just_anexo', label: 'CAPACITAÇÃO/ONBOARDING'},
+        {type: 'meta_real_perc_anexo', label: 'CAPACITAÇÃO/ONBOARDING'},
         {type: 'input_text_only', label: 'CAPACITAÇÃO/ONBOARDING - NOME RESPONSÁVEL'},
-        {type: 'qtd_just_anexo', label: 'RECICLAGEM'},
+        {type: 'meta_real_perc_anexo', label: 'RECICLAGEM'},
         {type: 'input_text_only', label: 'RECICLAGEM - NOME RESPONSÁVEL'},
         {type: 'input_just_only', label: 'ANÁLISE LC PRODUTIVIDADE'},
         {type: 'input_text_only', label: 'REVISÃO MATERIAL - NOME RESPONSÁVEL'},
@@ -483,6 +520,35 @@
         {type: 'input_just_anexo_only', label: 'OBSERVAÇÕES DO TURNO'}
       ]
     };
+
+    function setToggle(btn, inputId, val) {
+      const parent = btn.parentElement;
+      parent.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active-sim', 'active-nao'));
+      if(val === 'SIM') btn.classList.add('active-sim');
+      if(val === 'NÃO') btn.classList.add('active-nao');
+      document.getElementById(inputId).value = val;
+    }
+
+    function calcPerc(id) {
+      const meta = parseFloat(document.getElementById(`meta_${id}`).value) || 0;
+      const real = parseFloat(document.getElementById(`real_${id}`).value) || 0;
+      if(meta > 0) {
+        const p = ((real / meta) * 100).toFixed(1);
+        document.getElementById(`perc_${id}`).value = `${p}%`;
+      } else {
+        document.getElementById(`perc_${id}`).value = '0%';
+      }
+    }
+
+    function handleFileUpload(input, id) {
+      if(input.files && input.files[0]) {
+        const btn = document.getElementById(`btn_file_${id}`);
+        if(btn) {
+          btn.innerText = "✓ ANEXADO";
+          btn.classList.add('btn-attached');
+        }
+      }
+    }
 
     function renderFields() {
       const area = document.getElementById('areaSelect').value;
@@ -546,8 +612,8 @@
         else if (item.type === 'relogio_just_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="text" name="${prefix}_DATA_HORA" class="input-premium" placeholder="dd/mm/aaaa --:--"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Sem observações"></div>
+            <div><input type="text" name="${prefix}_DADO" class="input-premium" placeholder="Valor / Hora"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
@@ -610,8 +676,8 @@
         else if (item.type === 'real_just_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label} <span class="inline-block text-[9px] text-slate-400 font-medium">${item.desc || ''}</span></div>
-            <div><input type="text" name="${prefix}_REAL" class="input-premium" placeholder="%"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Sem observações"></div>
+            <div><input type="number" name="${prefix}_REAL" class="input-premium" placeholder="Real"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
@@ -636,7 +702,7 @@
         else if (item.type === 'qtd_just_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="number" name="${prefix}_QTD" class="input-premium" placeholder="Qtd"></div>
+            <div><input type="number" name="${prefix}_QTD" class="input-premium" placeholder="Quantidade"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
@@ -647,7 +713,7 @@
         else if (item.type === 'perc_just_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="text" name="${prefix}_PERC" class="input-premium" placeholder="%"></div>
+            <div><input type="text" name="${prefix}_PERC" class="input-premium" placeholder="Ex: 5%"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
@@ -658,19 +724,21 @@
         else if (item.type === 'input_text_only') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="col-span-3"><input type="text" name="${prefix}_TEXT" class="input-premium" placeholder="Nome / Informação"></div>
+            <div class="col-span-2"><input type="text" name="${prefix}_TEXTO" class="input-premium" placeholder="Digite a informação..."></div>
+            <div class="opacity-30"><button type="button" class="bg-slate-200 text-slate-400 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 cursor-not-allowed" disabled>N/A</button></div>
           </div>`;
         }
         else if (item.type === 'input_just_only') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="col-span-3"><input type="text" name="${prefix}_TEXT" class="input-premium" placeholder="Análise de LC / Produtividade"></div>
+            <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa obrigatória"></div>
+            <div class="opacity-30"><button type="button" class="bg-slate-200 text-slate-400 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 cursor-not-allowed" disabled>N/A</button></div>
           </div>`;
         }
         else if (item.type === 'input_just_anexo_only') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Observações"></div>
+            <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Observações Gerais"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
@@ -683,63 +751,27 @@
       container.innerHTML = html;
     }
 
-    function setToggle(btn, targetId, val) {
-      const row = btn.parentElement;
-      row.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active-sim', 'active-nao'));
-      if(val === 'SIM') btn.classList.add('active-sim');
-      else btn.classList.add('active-nao');
-      document.getElementById(targetId).value = val;
-    }
-
-    function calcPerc(id) {
-      const meta = parseFloat(document.getElementById(`meta_${id}`).value);
-      const real = parseFloat(document.getElementById(`real_${id}`).value);
-      if(meta && real) {
-        const p = ((real / meta) * 100).toFixed(0) + '%';
-        document.getElementById(`perc_${id}`).value = p;
-      } else {
-        document.getElementById(`perc_${id}`).value = '';
-      }
-    }
-
-    function handleFileUpload(input, id) {
-      if (input.files && input.files[0]) {
-        const btn = document.getElementById(`btn_file_${id}`);
-        if(btn) {
-          btn.classList.add('btn-attached');
-          btn.innerText = '✅ ANEXADO';
-        }
-      }
-    }
-
     function baixarRelatorio() {
-      const element = document.getElementById('report-content');
-      element.classList.add('canvas-snapshot');
-      
-      html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
+      const target = document.getElementById('report-content');
+      target.classList.add('canvas-snapshot');
+      html2canvas(target, { scale: 2, useCORS: true }).then(canvas => {
         const link = document.createElement('a');
-        link.download = `EOS_BR_${document.getElementById('areaSelect').value || 'REPORT'}.png`;
-        link.href = imgData;
+        link.download = `EOS_BR_PassagemTurno_${new Date().toISOString().slice(0,10)}.png`;
+        link.href = canvas.toDataURL('image/png');
         link.click();
-        element.classList.remove('canvas-snapshot');
+        target.classList.remove('canvas-snapshot');
       });
     }
 
     function enviarDados() {
-      const btnText = document.getElementById('btnText');
-      const btnSpinner = document.getElementById('btnSpinner');
-      const modal = document.getElementById('success-modal');
-
-      btnText.innerText = "Enviando...";
-      btnSpinner.style.display = "block";
-
+      document.getElementById('btnSpinner').style.display = 'inline-block';
+      document.getElementById('btnText').innerText = 'Enviando...';
+      
       setTimeout(() => {
-        btnText.innerText = "Finalizar e Enviar Relatório";
-        btnSpinner.style.display = "none";
-        modal.style.flex = "flex";
-        modal.style.display = "flex";
-      }, 2000);
+        document.getElementById('btnSpinner').style.display = 'none';
+        document.getElementById('btnText').innerText = 'Finalizar e Enviar Relatório';
+        document.getElementById('success-modal').style.display = 'flex';
+      }, 1500);
     }
   </script>
 </body>
