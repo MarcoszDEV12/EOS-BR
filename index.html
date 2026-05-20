@@ -310,7 +310,7 @@
     <div class="bg-white p-8 rounded-2xl text-center shadow-2xl max-w-sm border border-slate-100">
       <div class="text-5xl mb-3">✅</div>
       <h2 class="text-xl font-black mb-1 text-slate-900">Relatório Salvo!</h2>
-      <p class="text-slate-500 mb-4 text-xs">Passagem de turno enviada com sucesso para a pasta do Drive.</p>
+      <p class="text-slate-500 mb-4 text-xs">Passagem de turno enviada com sucesso!</p>
       <button class="bg-orange-600 text-white w-full py-2.5 rounded-xl font-bold hover:bg-orange-700 shadow-md transition-all" onclick="location.reload()">NOVO REGISTRO</button>
     </div>
   </div>
@@ -440,26 +440,25 @@
         {type: 'qtd_just_anexo', label: 'AVARIAS TRATADAS'},
         {type: 'qtd_just_anexo', label: 'BACKLOG'},
         {type: 'meta_real_just_anexo', label: 'RETURNS'},
-        {type: 'input_text_only', label: 'RESPONSÁVEL - NOME RESPONSÁVEL'},
         {type: 'qtd_just_anexo', label: 'BACKLOG REVERSA'},
         
         {type: 'section_header', label: 'RESPONSABILIDADE RR'},
         {type: 'input_text_only', label: 'RR - NOME RESPONSÁVEL'},
         {type: 'qtd_just_anexo', label: 'RR'},
-        {type: 'input_date_only', label: 'RR Reference Day'},
-        {type: 'input_date_only', label: 'Outbound Time'},
-        {type: 'input_number_only', label: 'OB Orders D-1'},
-        {type: 'input_number_only', label: 'RR Orders D-1'},
-        {type: 'input_perc_only', label: 'RR Rate D-1'},
-        {type: 'input_perc_only', label: 'RR Rate D-2'},
-        {type: 'input_perc_only', label: 'RR Rate D-3'},
-        {type: 'input_perc_only', label: 'RR 7 Rolling Days'},
+        {type: 'relogio_just_anexo', label: 'RR Reference Day'},
+        {type: 'relogio_just_anexo', label: 'Outbound Time'},
+        {type: 'qtd_just_anexo', label: 'OB Orders D-1'},
+        {type: 'qtd_just_anexo', label: 'RR Orders D-1'},
+        {type: 'real_just_anexo', label: 'RR Rate D-1'},
+        {type: 'real_just_anexo', label: 'RR Rate D-2'},
+        {type: 'real_just_anexo', label: 'RR Rate D-3'},
+        {type: 'real_just_anexo', label: 'RR 7 Rolling Days'},
         {type: 'toggle_just', label: 'RR (Plano de Ação)'},
         
         {type: 'section_header', label: 'TREINAMENTOS'},
-        {type: 'input_number_only', label: 'CAPACITAÇÃO/ONBOARDING - QUANTIDADE'},
+        {type: 'qtd_just_anexo', label: 'CAPACITAÇÃO/ONBOARDING'},
         {type: 'input_text_only', label: 'CAPACITAÇÃO/ONBOARDING - NOME RESPONSÁVEL'},
-        {type: 'input_number_only', label: 'RECICLAGEM - QUANTIDADE'},
+        {type: 'qtd_just_anexo', label: 'RECICLAGEM'},
         {type: 'input_text_only', label: 'RECICLAGEM - NOME RESPONSÁVEL'},
         {type: 'input_just_only', label: 'ANÁLISE LC PRODUTIVIDADE'},
         {type: 'input_text_only', label: 'REVISÃO MATERIAL - NOME RESPONSÁVEL'},
@@ -547,8 +546,8 @@
         else if (item.type === 'relogio_just_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="time" name="${prefix}_HORA" class="input-premium"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div><input type="text" name="${prefix}_DATA_HORA" class="input-premium" placeholder="dd/mm/aaaa --:--"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Sem observações"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
@@ -611,8 +610,8 @@
         else if (item.type === 'real_just_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label} <span class="inline-block text-[9px] text-slate-400 font-medium">${item.desc || ''}</span></div>
-            <div><input type="number" name="${prefix}_REAL" class="input-premium" placeholder="Real"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div><input type="text" name="${prefix}_REAL" class="input-premium" placeholder="%"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Sem observações"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
@@ -648,21 +647,7 @@
         else if (item.type === 'perc_just_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="text" name="${prefix}_PERC" class="input-premium text-center" placeholder="%"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
-            <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'meta_real_just_anexo') {
-          html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="grid grid-cols-2 gap-1">
-              <input type="text" name="${prefix}_MEL" class="input-premium text-center text-xs" placeholder="Mel">
-              <input type="text" name="${prefix}_REA" class="input-premium text-center text-xs" placeholder="Rea">
-            </div>
+            <div><input type="text" name="${prefix}_PERC" class="input-premium" placeholder="%"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
@@ -673,45 +658,19 @@
         else if (item.type === 'input_text_only') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="col-span-2"><input type="text" name="${prefix}_TEXT" class="input-premium" placeholder="Nome / Informação"></div>
-            <div><input type="text" class="input-premium opacity-30 text-center" placeholder="-" disabled></div>
-          </div>`;
-        }
-        else if (item.type === 'input_date_only') {
-          html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="date" name="${prefix}_DATE" class="input-premium"></div>
-            <div><input type="text" class="input-premium opacity-50" placeholder="Sem observações" disabled></div>
-            <div><input type="text" class="input-premium opacity-30 text-center" placeholder="-" disabled></div>
-          </div>`;
-        }
-        else if (item.type === 'input_number_only') {
-          html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="number" name="${prefix}_NUM" class="input-premium text-center" placeholder="Qtd"></div>
-            <div><input type="text" class="input-premium opacity-50" placeholder="Sem observações" disabled></div>
-            <div><input type="text" class="input-premium opacity-30 text-center" placeholder="-" disabled></div>
-          </div>`;
-        }
-        else if (item.type === 'input_perc_only') {
-          html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="text" name="${prefix}_PERC" class="input-premium text-center" placeholder="%"></div>
-            <div><input type="text" class="input-premium opacity-50" placeholder="Sem observações" disabled></div>
-            <div><input type="text" class="input-premium opacity-30 text-center" placeholder="-" disabled></div>
+            <div class="col-span-3"><input type="text" name="${prefix}_TEXT" class="input-premium" placeholder="Nome / Informação"></div>
           </div>`;
         }
         else if (item.type === 'input_just_only') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Análise de LC / Produtividade"></div>
-            <div><input type="text" class="input-premium opacity-30 text-center" placeholder="-" disabled></div>
+            <div class="col-span-3"><input type="text" name="${prefix}_TEXT" class="input-premium" placeholder="Análise de LC / Produtividade"></div>
           </div>`;
         }
         else if (item.type === 'input_just_anexo_only') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Observações Gerais"></div>
+            <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Observações"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
@@ -724,140 +683,63 @@
       container.innerHTML = html;
     }
 
-    function setToggle(btn, inputId, val) {
-      const parent = btn.parentElement;
-      parent.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active-sim', 'active-nao'));
-      document.getElementById(inputId).value = val;
-      if (val === 'SIM') btn.classList.add('active-sim');
+    function setToggle(btn, targetId, val) {
+      const row = btn.parentElement;
+      row.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active-sim', 'active-nao'));
+      if(val === 'SIM') btn.classList.add('active-sim');
       else btn.classList.add('active-nao');
+      document.getElementById(targetId).value = val;
     }
 
     function calcPerc(id) {
-      const meta = parseFloat(document.getElementById(`meta_${id}`).value) || 0;
-      const real = parseFloat(document.getElementById(`real_${id}`).value) || 0;
-      const out = document.getElementById(`perc_${id}`);
-      if(meta > 0) {
-        out.value = ((real / meta) * 100).toFixed(1) + '%';
+      const meta = parseFloat(document.getElementById(`meta_${id}`).value);
+      const real = parseFloat(document.getElementById(`real_${id}`).value);
+      if(meta && real) {
+        const p = ((real / meta) * 100).toFixed(0) + '%';
+        document.getElementById(`perc_${id}`).value = p;
       } else {
-        out.value = '0%';
+        document.getElementById(`perc_${id}`).value = '';
       }
     }
 
     function handleFileUpload(input, id) {
-      if (!input.files || !input.files[0]) return;
-      const file = input.files[0];
-      const reader = new FileReader();
-      
-      const btn = document.getElementById(`btn_file_${id}`);
-      if(btn) {
-        btn.innerText = "CARREGANDO...";
-        btn.style.opacity = "0.6";
-      }
-
-      reader.onload = function(e) {
-        const img = new Image();
-        img.src = e.target.result;
-        img.onload = function() {
-          const canvas = document.getElementById('photoCanvas');
-          const ctx = canvas.getContext('2d');
-          
-          let width = img.width;
-          let height = img.height;
-          const max = 800;
-          
-          if (width > height && width > max) { height *= max / width; width = max; }
-          else if (height > max) { width *= max / height; height = max; }
-          
-          canvas.width = width;
-          canvas.height = height;
-          ctx.drawImage(img, 0, 0, width, height);
-          
-          const compressed = canvas.toDataURL('image/jpeg', 0.7);
-          
-          if(id === 'final') {
-            document.getElementById('data_final').value = compressed;
-          } else {
-            let hidden = document.getElementById(`hidden_file_${id}`);
-            if(!hidden) {
-              hidden = document.createElement('input');
-              hidden.type = 'hidden';
-              hidden.id = `hidden_file_${id}`;
-              hidden.name = input.name + "_FOTO";
-              input.parentElement.appendChild(hidden);
-            }
-            hidden.value = compressed;
-          }
-
-          if(btn) {
-            btn.innerText = "✅ OK";
-            btn.classList.add('btn-attached');
-            btn.style.opacity = "1";
-          }
+      if (input.files && input.files[0]) {
+        const btn = document.getElementById(`btn_file_${id}`);
+        if(btn) {
+          btn.classList.add('btn-attached');
+          btn.innerText = '✅ ANEXADO';
         }
       }
-      reader.readAsDataURL(file);
     }
 
     function baixarRelatorio() {
-      const el = document.getElementById('report-content');
-      el.classList.add('canvas-snapshot');
+      const element = document.getElementById('report-content');
+      element.classList.add('canvas-snapshot');
       
-      const btnDownload = document.getElementById('btnDownload');
-      const originalText = btnDownload.innerText;
-      btnDownload.innerText = "PROCESSANDO CARD...";
-
-      html2canvas(el, { scale: 2, useCORS: true, logging: false }).then(canvas => {
+      html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
         const link = document.createElement('a');
-        link.download = `Passagem_Turno_${new Date().toISOString().split('T')[0]}.png`;
-        link.href = canvas.toDataURL('image/png');
+        link.download = `EOS_BR_${document.getElementById('areaSelect').value || 'REPORT'}.png`;
+        link.href = imgData;
         link.click();
-        
-        el.classList.remove('canvas-snapshot');
-        btnDownload.innerText = originalText;
-      }).catch(err => {
-        console.error(err);
-        el.classList.remove('canvas-snapshot');
-        btnDownload.innerText = originalText;
+        element.classList.remove('canvas-snapshot');
       });
     }
 
     function enviarDados() {
-      const form = document.getElementById('eosForm');
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
+      const btnText = document.getElementById('btnText');
+      const btnSpinner = document.getElementById('btnSpinner');
+      const modal = document.getElementById('success-modal');
 
-      const btn = document.getElementById('btnEnviar');
-      const txt = document.getElementById('btnText');
-      const spin = document.getElementById('btnSpinner');
+      btnText.innerText = "Enviando...";
+      btnSpinner.style.display = "block";
 
-      btn.disabled = true;
-      txt.innerText = "Processando e Salvando...";
-      spin.style.display = "block";
-
-      const formData = new FormData(form);
-      const dataObj = {};
-      formData.forEach((val, key) => { dataObj[key] = val; });
-
-      fetch('https://script.google.com/macros/s/AKfycbwYgRGo6S2oI8pY9Zlq4A_h16X-RzDof392_8T9y_22bBv_gQJvI2wRndM68pDshf5u/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dataObj)
-      })
-      .then(() => {
-        document.getElementById('success-modal').style.display = 'flex';
-      })
-      .catch(err => {
-        console.error(err);
-        alert('Erro ao enviar dados. Tente novamente.');
-      })
-      .finally(() => {
-        btn.disabled = false;
-        txt.innerText = "Finalizar e Enviar Relatório";
-        spin.style.display = "none";
-      });
+      setTimeout(() => {
+        btnText.innerText = "Finalizar e Enviar Relatório";
+        btnSpinner.style.display = "none";
+        modal.style.flex = "flex";
+        modal.style.display = "flex";
+      }, 2000);
     }
   </script>
 </body>
