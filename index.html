@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EOS-BR | Passagem de Turno Premium</title>
+  "https://docs.google.com/spreadsheets/d/11AUpBiacxRMwZ5QsSQ9JZotgKnGFvdG86qt0P64cP-Y/edit?gid=2014298689#gid=2014298689";
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -656,6 +657,76 @@
             </div>
           </div>`;
         }
+        else if (item.type === 'input_text_only') {
+           html += `<div class="unified-grid-row" style="grid-template-columns: 2fr 3.3fr 0.8fr">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="text" name="${prefix}_TEXT" class="input-premium" placeholder="Nome do Responsável"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_number_just_anexo') {
+            html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="number" name="${prefix}_VALOR" class="input-premium" placeholder="Valor"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_perc_just_anexo') {
+            html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="text" name="${prefix}_VALOR" class="input-premium" placeholder="%"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_date_just_anexo') {
+            html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="date" name="${prefix}_DATA" class="input-premium"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_just_anexo_only') {
+            html += `<div class="unified-grid-row" style="grid-template-columns: 2fr 4.1fr 0.8fr">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Observações Gerais"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_just_only') {
+           html += `<div class="unified-grid-row" style="grid-template-columns: 2fr 4.9fr">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Análise detalhada..."></div>
+          </div>`;
+        }
+        else if (item.type === 'perc_just_anexo') {
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div><input type="text" name="${prefix}_PERC" class="input-premium" placeholder="%"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
         else if (item.type === 'plano_real_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
@@ -670,17 +741,13 @@
             </div>
           </div>`;
         }
-        else if (item.type === 'input_text_only') {
+        else if (item.type === 'meta_real_just_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="col-span-2"><input type="text" name="${prefix}_TXT" class="input-premium" placeholder="Digite o texto explicativo"></div>
-            <div><input type="text" class="input-premium opacity-50" placeholder="Sem anexo" disabled></div>
-          </div>`;
-        }
-        else if (item.type === 'input_number_just_anexo') {
-          html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="number" name="${prefix}_NUM" class="input-premium text-center" placeholder="Valor"></div>
+            <div class="grid grid-cols-2 gap-1">
+              <input type="number" name="${prefix}_META" class="input-premium text-center" placeholder="Meta">
+              <input type="number" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real">
+            </div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
@@ -688,39 +755,11 @@
             </div>
           </div>`;
         }
-        else if (item.type === 'input_date_just_anexo') {
+        else if (item.type === 'qtd_real_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="date" name="${prefix}_DATA" class="input-premium text-center"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
-            <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'input_perc_just_anexo' || item.type === 'perc_just_anexo') {
-          html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="text" name="${prefix}_PERC" class="input-premium text-center" placeholder="Ex: 95%"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
-            <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'input_just_only') {
-          html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Análise / Justificativa"></div>
-            <div><input type="text" class="input-premium opacity-50" placeholder="Sem anexo" disabled></div>
-          </div>`;
-        }
-        else if (item.type === 'input_just_anexo_only') {
-          html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Observações gerais do turno"></div>
+            <div><input type="number" name="${prefix}_QTD" class="input-premium text-center" placeholder="Qtd"></div>
+            <div><input type="number" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real"></div>
             <div>
               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
@@ -733,46 +772,43 @@
       container.innerHTML = html;
     }
 
-    // Função simulação de download do relatório usando html2canvas
-    function baixarRelatorio() {
-      const content = document.getElementById('report-content');
-      content.classList.add('canvas-snapshot');
-      
-      html2canvas(content, { scale: 2, useCORS: true }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = `EOS_BR_Passagem_Turno_${document.getElementById('areaSelect').value || 'Geral'}.png`;
-        link.href = canvas.toDataURL();
-        link.click();
-        content.classList.remove('canvas-snapshot');
-      }).catch(err => {
-        console.error('Erro ao gerar imagem:', err);
-        content.classList.remove('canvas-snapshot');
-      });
+    async function enviarDados() {
+        const btn = document.getElementById('btnEnviar');
+        const spinner = document.getElementById('btnSpinner');
+        const text = document.getElementById('btnText');
+        
+        btn.disabled = true;
+        spinner.style.display = 'block';
+        text.innerText = 'Enviando...';
+
+        const form = document.getElementById('eosForm');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            // Simulação de envio para Google Apps Script
+            // Substituir a URL abaixo pela URL do seu Web App
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            document.getElementById('success-modal').style.display = 'flex';
+        } catch (e) {
+            alert('Erro ao enviar, tente novamente.');
+        } finally {
+            btn.disabled = false;
+            spinner.style.display = 'none';
+            text.innerText = 'Finalizar e Enviar Relatório';
+        }
     }
 
-    <script>
-    Chart.register(ChartDataLabels);
-
-    const SPREADSHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/11AUpBiacxRMwZ5QsSQ9JZotgKnGFvdG86qt0P64cP-Y/edit?gid=2014298689#gid=2014298689";
-
-    // Envio simulado de dados
-    function enviarDados() {
-      const form = document.getElementById('eosForm');
-      if(!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      document.getElementById('btnText').innerText = "Enviando...";
-      document.getElementById('btnSpinner').style.display = "inline-block";
-      document.getElementById('btnEnviar').disabled = true;
-
-      setTimeout(() => {
-        document.getElementById('btnText').innerText = "Finalizar e Enviar Relatório";
-        document.getElementById('btnSpinner').style.display = "none";
-        document.getElementById('btnEnviar').disabled = false;
-        document.getElementById('success-modal').style.display = "flex";
-      }, 2000);
+    async function baixarRelatorio() {
+        const element = document.getElementById('report-content');
+        element.classList.add('canvas-snapshot');
+        const canvas = await html2canvas(element, { scale: 2 });
+        const link = document.createElement('a');
+        link.download = `Relatorio_EOS_${new Date().getTime()}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        element.classList.remove('canvas-snapshot');
     }
   </script>
 </body>
