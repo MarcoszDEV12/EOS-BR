@@ -750,6 +750,11 @@
       });
     }
 
+    <script>
+    Chart.register(ChartDataLabels);
+
+    const SPREADSHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/11AUpBiacxRMwZ5QsSQ9JZotgKnGFvdG86qt0P64cP-Y/edit?gid=2014298689#gid=2014298689";
+
     // Envio simulado de dados
     function enviarDados() {
       const form = document.getElementById('eosForm');
