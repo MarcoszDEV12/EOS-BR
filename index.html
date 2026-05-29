@@ -449,22 +449,13 @@
         {type: 'input_text_only', label: 'AVARIAS - NOME RESPONSÁVEL'},
         {type: 'qtd_just_anexo', label: 'QUANTIDADE RECOLHIDAS'},
         {type: 'qtd_just_anexo', label: 'AVARIAS TRATADAS'},
-        {type: 'meta_real_just_anexo', label: 'RETURNS'},
         {type: 'qtd_just_anexo', label: 'BACKLOG'},
-        {type: 'qtd_just_anexo', label: 'BACKLOG REVERSA'},
-        
-        {type: 'section_header', label: 'RESPONSABILIDADE RR'},
-        {type: 'input_text_only', label: 'RR - NOME RESPONSÁVEL'},
-        {type: 'qtd_just_anexo', label: 'RR'},
-        {type: 'input_date_just_anexo', label: 'RR Reference Day'},
-        {type: 'input_date_just_anexo', label: 'Outbound Time'},
-        {type: 'input_number_just_anexo', label: 'OB Orders D-1'},
-        {type: 'input_number_just_anexo', label: 'RR Orders D-1'},
-        {type: 'input_perc_just_anexo', label: 'RR Rate D-1'},
-        {type: 'input_perc_just_anexo', label: 'RR Rate D-2'},
-        {type: 'input_perc_just_anexo', label: 'RR Rate D-3'},
-        {type: 'input_perc_just_anexo', label: 'RR 7 Rolling Days'},
-        {type: 'toggle_just', label: 'RR (Plano de Ação)'},
+
+        {type: 'section_header', label: 'RETURNS'},
+        {type: 'meta_real_just_anexo', label: 'RETURNS'},
+
+        {type: 'section_header', label: 'RR - RESPONSÁVEL'},
+        {type: 'bloco_notas', label: 'RR - ADICIONE AS INFORMAÇÕES'},
         
         {type: 'section_header', label: 'TREINAMENTOS'},
         {type: 'input_number_just_anexo', label: 'CAPACITAÇÃO/ONBOARDING'},
@@ -493,7 +484,6 @@
         {type: 'qtd_just_anexo', label: 'BACKLOG CUBSCAN'},
         {type: 'input_just_anexo_only', label: 'OBSERVAÇÕES DO TURNO'}
       ]
-    };
 
     function updateInfoCard() {
       // Mantido para compatibilidade de chamadas de eventos externos
