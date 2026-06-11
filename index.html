@@ -13,7 +13,7 @@
       --shopee-orange: #EE4D2D;
       --shopee-dark: #1e1e24;
       --shopee-bg: #f5f7fb;
-      --card-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.05);
+      --card-shadow: 0 6px 15px -4px rgba(0, 0, 0, 0.05);
     }
  
     body {
@@ -24,20 +24,21 @@
 
     .shopee-header {
       background: linear-gradient(135deg, #ee4d2d, #ff5722);
-      padding: 10px 24px;
+      padding: 8px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 6px 15px rgba(238, 77, 45, 0.15);
-      border-bottom: 3px solid #ff7337;
+      box-shadow: 0 4px 12px rgba(238, 77, 45, 0.12);
+      border-bottom: 2px solid #ff7337;
     }
 
+    /* Layout mais achatado e compacto */
     .card-master {
       background: white;
-      border-radius: 14px;
+      border-radius: 10px;
       box-shadow: var(--card-shadow);
-      margin-bottom: 12px;
-      padding: 16px;
+      margin-bottom: 8px;
+      padding: 12px;
       border: 1px solid #e2e8f0;
       position: relative;
       overflow: hidden;
@@ -49,29 +50,29 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 4px;
+      height: 3px;
       background: linear-gradient(90deg, #ee4d2d, #ff7337);
     }
 
     .section-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 900;
       color: #0f172a;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
       display: flex;
       align-items: center;
-      gap: 6px;
-      margin-bottom: 10px;
+      gap: 5px;
+      margin-bottom: 8px;
       text-transform: uppercase;
     }
 
     .section-title::before {
       content: '';
       display: inline-block;
-      width: 5px;
-      height: 16px;
+      width: 4px;
+      height: 14px;
       background: var(--shopee-orange);
-      border-radius: 3px;
+      border-radius: 2px;
     }
 
     .quality-sub-header {
@@ -79,19 +80,20 @@
       font-weight: 900;
       color: #ee4d2d;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
+      letter-spacing: 1px;
       background-color: #fff5f3;
-      padding: 4px 10px;
-      border-left: 4px solid #ee4d2d;
-      border-radius: 0 6px 6px 0;
-      margin-top: 10px;
-      margin-bottom: 4px;
+      padding: 3px 8px;
+      border-left: 3px solid #ee4d2d;
+      border-radius: 0 4px 4px 0;
+      margin-top: 8px;
+      margin-bottom: 3px;
       display: block;
       width: 100%;
     }
 
+    /* Redução de tamanho de inputs para achatar o formulário */
     .input-premium {
-      height: 34px;
+      height: 30px;
       border: 1.5px solid #e2e8f0;
       border-radius: 6px;
       padding: 0 10px;
@@ -107,20 +109,20 @@
       border-color: var(--shopee-orange);
       outline: none;
       background: #fff;
-      box-shadow: 0 0 0 3px rgba(238, 77, 45, 0.1);
+      box-shadow: 0 0 0 2px rgba(238, 77, 45, 0.08);
     }
 
     select.input-premium {
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 10px center;
+      background-position: right 8px center;
       background-size: 12px;
-      padding-right: 28px;
+      padding-right: 24px;
     }
 
     .btn-toggle {
-      height: 34px;
+      height: 30px;
       flex: 1;
       border: 1.5px solid #e2e8f0;
       border-radius: 6px;
@@ -128,7 +130,8 @@
       background: #f8fafc;
       color: #64748b;
       transition: all 0.15s ease;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
+      font-size: 11px;
     }
 
     .btn-toggle:hover {
@@ -136,45 +139,45 @@
       border-color: #cbd5e1;
     }
 
-    .active-sim { background: #10b981 !important; color: white !important; border-color: #10b981 !important; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15); }
-    .active-nao { background: #ee4d2d !important; color: white !important; border-color: #ee4d2d !important; box-shadow: 0 2px 6px rgba(238, 77, 45, 0.15); }
+    .active-sim { background: #10b981 !important; color: white !important; border-color: #10b981 !important; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.1); }
+    .active-nao { background: #ee4d2d !important; color: white !important; border-color: #ee4d2d !important; box-shadow: 0 2px 6px rgba(238, 77, 45, 0.1); }
 
     .btn-send {
       background: linear-gradient(95deg, #1e1e24, #0f172a);
       color: white;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       transition: all 0.3s;
-      box-shadow: 0 6px 15px rgba(15, 23, 42, 0.15);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
       border: 1px solid #334155;
     }
 
     .btn-send:hover {
       transform: translateY(-1px);
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
-      background: linear-gradient(95deg, #0f172a, #020617);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.2);
     }
 
+    /* Redução de espaçamentos nas linhas */
     .unified-grid-row {
       display: grid;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
-      padding: 3px 6px;
+      padding: 2px 4px;
       border-bottom: 1px solid #f1f5f9;
       grid-template-columns: 2fr 1.2fr 2.5fr 0.8fr;
     }
 
     .unified-grid-row:hover {
       background-color: #f8fafc;
-      border-radius: 6px;
+      border-radius: 4px;
     }
 
     @media (max-width: 768px) {
       .unified-grid-row { 
         grid-template-columns: 1fr !important; 
-        gap: 6px; 
-        padding: 8px 4px; 
+        gap: 4px; 
+        padding: 6px 2px; 
       }
     }
 
@@ -189,14 +192,14 @@
       justify-content: center;
     }
 
-    .spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; }
+    .spinner { display: none; width: 18px; height: 18px; border: 3.5px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .btn-attached {
       background-color: #10b981 !important;
       border-color: #059669 !important;
       color: white !important;
-      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15);
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.1);
     }
 
     .canvas-snapshot .input-premium {
@@ -209,7 +212,6 @@
       opacity: 0.4;
     }
 
-    /* Estilo robusto para manter o texto de Conclusão e Evidências íntegro e visível ao exportar */
     #justificativa_final {
       word-wrap: break-word;
       overflow-wrap: break-word;
@@ -219,7 +221,6 @@
     .canvas-snapshot #justificativa_final {
       border-color: #cbd5e1 !important;
       height: auto !important;
-      min-height: 100px;
     }
   </style>
 </head>
@@ -227,23 +228,23 @@
 
   <header class="shopee-header shadow-md sticky top-0 z-50">
     <div class="flex items-center gap-3">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="Shopee" class="h-7 brightness-0 invert">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="Shopee" class="h-6 brightness-0 invert">
       <div class="text-white border-l-2 border-white/30 pl-3">
-        <h1 class="text-xl font-black tracking-tighter">EOS-BR</h1>
-        <p class="text-[9px] font-bold uppercase opacity-90 tracking-widest">PASSAGEM DE TURNO</p>
+        <h1 class="text-lg font-black tracking-tighter">EOS-BR</h1>
+        <p class="text-[8px] font-bold uppercase opacity-90 tracking-widest">PASSAGEM DE TURNO</p>
       </div>
     </div>
-    <div id="clock" class="bg-black/20 text-white px-4 py-1 rounded-full text-xs font-bold border border-white/20 backdrop-blur-sm tracking-wide">00:00:00</div>
+    <div id="clock" class="bg-black/20 text-white px-3 py-0.5 rounded-full text-[11px] font-bold border border-white/15 backdrop-blur-sm tracking-wide">00:00:00</div>
   </header>
 
-  <main class="max-w-6xl mx-auto p-4 md:p-6">
+  <main class="max-w-6xl mx-auto p-3 md:p-5">
     <div id="report-content">
       <form id="eosForm">
         <div class="card-master">
           <div class="section-title">Informações de Identificação</div>
           <div class="grid grid-cols-1 md:grid-cols-5 gap-2">
             <div>
-              <label class="text-[9px] font-black text-slate-500 mb-1 block uppercase tracking-wider">CD Operacional</label>
+              <label class="text-[9px] font-black text-slate-500 mb-0.5 block uppercase tracking-wider">CD Operacional</label>
               <select name="cd_operacional" id="cd_operacional" class="input-premium" required onchange="updateInfoCard()">
                 <option value="">Selecione...</option>
                 <option value="BRFPE1">BRFPE1</option>
@@ -255,11 +256,11 @@
               </select>
             </div>
             <div>
-              <label class="text-[9px] font-black text-slate-500 mb-1 block uppercase tracking-wider">Responsável</label>
+              <label class="text-[9px] font-black text-slate-500 mb-0.5 block uppercase tracking-wider">Responsável</label>
               <input type="text" name="responsavel" id="responsavel" class="input-premium" placeholder="Nome" required oninput="updateInfoCard()">
             </div>
             <div>
-              <label class="text-[9px] font-black text-slate-500 mb-1 block uppercase tracking-wider">Cargo</label>
+              <label class="text-[9px] font-black text-slate-500 mb-0.5 block uppercase tracking-wider">Cargo</label>
               <select name="cargo" id="cargo" class="input-premium" required onchange="updateInfoCard()">
                 <option value="">Selecione</option>
                 <option value="TEAM LEADER">TEAM LEADER</option>
@@ -271,14 +272,14 @@
               </select>
             </div>
             <div>
-              <label class="text-[9px] font-black text-slate-500 mb-1 block uppercase tracking-wider">Turno</label>
+              <label class="text-[9px] font-black text-slate-500 mb-0.5 block uppercase tracking-wider">Turno</label>
               <select name="turno" id="turno" class="input-premium" required onchange="updateInfoCard()">
                 <option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option>
                 <option value="T4">T4</option><option value="T5">T5</option><option value="T6">T6</option><option value="T7">T7</option>
               </select>
             </div>
             <div>
-              <label class="text-[9px] font-black text-orange-600 mb-1 block uppercase tracking-wider">Área de Atuação</label>
+              <label class="text-[9px] font-black text-orange-600 mb-0.5 block uppercase tracking-wider">Área de Atuação</label>
               <select name="area_atuacao" id="areaSelect" class="input-premium border-orange-300 bg-orange-50 font-extrabold text-orange-700 shadow-sm" required onchange="renderFields(); updateInfoCard();">
                   <option value="">SELECIONAR ÁREA</option>
                   <option value="INBOUND">INBOUND</option>
@@ -300,22 +301,23 @@
         <div class="card-master">
           <div class="section-title">Conclusão e Evidências</div>
           
-          <!-- Delimitação de espaços laterais internos adicionada para manter o texto legível e visível -->
-          <div class="px-2 md:px-6 mb-4">
-            <textarea name="JUSTIFICATIVA_FINAL" id="justificativa_final" class="input-premium h-28 py-2 px-3 resize-y block w-full rounded-lg border border-slate-300 bg-white text-sm" placeholder="Relate aqui os principais desafios, gargalos ou recados para o próximo turno..." oninput="updateInfoCard()"></textarea>
+          <!-- Espaçamento lateral delimitado internamente para que o texto não corte e fique 100% visível -->
+          <div class="px-3 md:px-8 mb-3">
+            <textarea name="JUSTIFICATIVA_FINAL" id="justificativa_final" class="input-premium h-24 mb-3 py-2 px-3 resize-y block w-full rounded-lg border border-slate-300 bg-white text-xs leading-relaxed" placeholder="Relate aqui os principais desafios, gargalos ou recados para o próximo turno..." oninput="updateInfoCard()"></textarea>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <button type="button" id="btn_file_final" onclick="document.getElementById('file_final').click()" class="bg-slate-50 p-2.5 rounded-lg font-bold border border-dashed border-slate-300 text-slate-600 hover:bg-slate-100 hover:border-slate-400 transition-all uppercase text-[9px] tracking-wider">📸 ANEXO PASSAGEM DE TURNO</button>
+                <button type="button" id="btnDownload" onclick="baixarRelatorio()" class="bg-orange-600 text-white p-2.5 rounded-lg font-black hover:bg-orange-700 transition-all shadow-sm text-[9px] tracking-wider uppercase">📥 GERAR E DESCARREGAR CARD (PNG)</button>
+            </div>
           </div>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 px-2 md:px-6">
-              <button type="button" id="btn_file_final" onclick="document.getElementById('file_final').click()" class="bg-slate-50 p-3 rounded-xl font-bold border-2 border-dashed border-slate-300 text-slate-600 hover:bg-slate-100 hover:border-slate-400 transition-all uppercase text-[10px] tracking-wider">📸 ANEXO PASSAGEM DE TURNO</button>
-              <button type="button" id="btnDownload" onclick="baixarRelatorio()" class="bg-orange-600 text-white p-3 rounded-xl font-black border-2 border-transparent hover:bg-orange-700 transition-all shadow-md text-[10px] tracking-wider uppercase">📥 GERAR E DESCARREGAR CARD (PNG)</button>
-          </div>
           <input type="file" id="file_final" class="hidden" accept="image/*" onchange="handleFileUpload(this, 'final')">
           <input type="hidden" name="FOTO_FINAL" id="data_final">
           <input type="hidden" name="drive_folder_link" value="https://drive.google.com/drive/folders/15SYHiWGr2mX3cv4UrgT99M5MxG5P1Xy6">
         </div>
 
-        <button type="button" id="btnEnviar" onclick="enviarDados()" class="btn-send w-full p-4 rounded-xl flex items-center justify-center gap-3 mb-12">
-          <span id="btnText" class="text-base">Finalizar e Enviar Relatório</span>
+        <button type="button" id="btnEnviar" onclick="enviarDados()" class="btn-send w-full p-3 rounded-lg flex items-center justify-center gap-2 mb-8">
+          <span id="btnText" class="text-sm">Finalizar e Enviar Relatório</span>
           <div id="btnSpinner" class="spinner"></div>
         </button>
       </form>
@@ -323,23 +325,23 @@
   </main>
 
   <div id="success-modal">
-    <div class="bg-white p-8 rounded-2xl text-center shadow-2xl max-w-sm border border-slate-100">
-      <div class="text-5xl mb-3">✅</div>
-      <h2 class="text-xl font-black mb-1 text-slate-900">Relatório Salvo!</h2>
-      <p class="text-slate-500 mb-4 text-xs">Passagem de turno enviada com sucesso!</p>
-      <button class="bg-orange-600 text-white w-full py-2.5 rounded-xl font-bold hover:bg-orange-700 shadow-md transition-all" onclick="location.reload()">NOVO REGISTRO</button>
+    <div class="bg-white p-6 rounded-xl text-center shadow-2xl max-w-xs border border-slate-100">
+      <div class="text-4xl mb-2">✅</div>
+      <h2 class="text-lg font-black mb-1 text-slate-900">Relatório Salvo!</h2>
+      <p class="text-slate-500 mb-3 text-[11px]">Passagem de turno enviada com sucesso!</p>
+      <button class="bg-orange-600 text-white w-full py-2 rounded-lg font-bold hover:bg-orange-700 shadow-md transition-all text-xs" onclick="location.reload()">NOVO REGISTRO</button>
     </div>
   </div>
 
   <canvas id="photoCanvas" class="hidden"></canvas>
 
   <script>
-    // Atualização do Relógio e Data do Card Informativo
+    // Relógio interno
     setInterval(() => {
       document.getElementById('clock').innerText = new Date().toLocaleTimeString('pt-BR');
     }, 1000);
     
-    // Configuração de Campos por Área
+    // Configurações das abas operacionais
     const config = {
       INBOUND: [
         {type: 'sim_nao_just_anexo', label: 'DDSMA'},
@@ -479,15 +481,15 @@
         {type: 'input_text_only', label: 'RR - NOME RESPONSÁVEL'},
         {type: 'qtd_just_anexo', label: 'RR'},
         
-        /* RR Reference Day e Rolling Days agora usam "input_text_just_anexo" para ficarem completamente livres e editáveis para copiar e colar */
-        {type: 'input_text_just_anexo', label: 'RR Reference Day'},
-        {type: 'input_text_just_anexo', label: 'Outbound Time'},
+        /* BLOCO DE NOTAS RR (Editável para copiar/colar de forma livre) */
+        {type: 'notepad_editable', label: 'RR Reference Day - Rolling Days'},
+        
+        {type: 'input_date_just_anexo', label: 'Outbound Time'},
         {type: 'input_number_just_anexo', label: 'OB Orders D-1'},
         {type: 'input_number_just_anexo', label: 'RR Orders D-1'},
         {type: 'input_perc_just_anexo', label: 'RR Rate D-1'},
         {type: 'input_perc_just_anexo', label: 'RR Rate D-2'},
         {type: 'input_perc_just_anexo', label: 'RR Rate D-3'},
-        {type: 'input_text_just_anexo', label: 'RR 7 Rolling Days'},
         {type: 'toggle_just', label: 'RR (Plano de Ação)'},
         
         {type: 'section_header', label: 'TREINAMENTOS'},
@@ -498,7 +500,7 @@
         {type: 'input_just_only', label: 'ANÁLISE LC PRODUTIVIDADE'},
         {type: 'input_text_only', label: 'REVISÃO MATERIAL - NOME RESPONSÁVEL'},
         
-        /* ABA DE AUDITORIAS - adicionado lista suspensa + LINHA DE OBSERVAÇÃO */
+        /* LINHA SUSPENSA + LINHA DE OBSERVAÇÃO PARA AUDITORIAS */
         {type: 'section_header', label: 'AUDITORIAS'},
         {type: 'select_obs_anexo', label: 'AUDITORIA DOCA INB'},
         {type: 'select_obs_anexo', label: 'AUDITORIA BOXING'},
@@ -521,10 +523,10 @@
     };
 
     function updateInfoCard() {
-      // Mantido para compatibilidade de chamadas de eventos externos
+      // Mantido para compatibilidade
     }
 
-    // Auxiliar para alternar botões SIM/NÃO
+    // Auxiliar de seleção de botões SIM/NÃO
     function setToggle(btn, hiddenId, value) {
       const container = btn.parentElement;
       container.querySelectorAll('.btn-toggle').forEach(b => {
@@ -538,7 +540,7 @@
       document.getElementById(hiddenId).value = value;
     }
 
-    // Auxiliar para calcular porcentagem automaticamente
+    // Auxiliar para cálculo de porcentagem automática
     function calcPerc(id) {
       const meta = parseFloat(document.getElementById(`meta_${id}`).value);
       const real = parseFloat(document.getElementById(`real_${id}`).value);
@@ -551,7 +553,7 @@
       }
     }
 
-    // Gerencia o feedback visual e armazenamento do upload de arquivos
+    // Gerencia o feedback de arquivo carregado
     function handleFileUpload(input, id) {
       const button = document.getElementById(`btn_file_${id}`);
       if(input.files && input.files[0]) {
@@ -583,6 +585,16 @@
         if (item.type === 'section_header') {
           html += `<div class="quality-sub-header">${item.label}</div>`;
         }
+        else if (item.type === 'notepad_editable') {
+          /* Renderização do Bloco de Notas para RR Reference Day e Rolling Days (Livre para Copiar/Colar) */
+          html += `<div class="my-2 p-2 bg-amber-50 border border-amber-200 rounded-lg">
+            <div class="text-[9px] font-black text-amber-800 uppercase mb-1 flex justify-between items-center px-1">
+              <span>📝 ${item.label} (Bloco de Notas Editável)</span>
+              <span class="text-[8px] bg-amber-200 px-1.5 py-0.5 rounded text-amber-700 font-bold">COPIAR / COLAR LIVRE</span>
+            </div>
+            <textarea name="${prefix}_NOTEPAD" class="w-full h-20 p-2 text-[11px] font-semibold text-slate-700 bg-white border border-amber-300 rounded focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 resize-y leading-tight" placeholder="Cole ou digite aqui as informações de Reference Day, Rolling Days e métricas de RR..."></textarea>
+          </div>`;
+        }
         else if (item.type === 'meta_real_perc_anexo') {
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-xs">${item.label}</div>
@@ -592,7 +604,7 @@
             </div>
             <div><input type="text" id="perc_${id}" name="${prefix}_PERC" class="input-premium bg-slate-100 text-center font-bold text-orange-600" placeholder="%" readonly></div>
             <div>
-               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
                <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -607,7 +619,7 @@
             </div>
             <div><input type="text" class="input-premium opacity-50 text-xs" placeholder="Sem justificativa" disabled></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -622,7 +634,7 @@
             </div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -633,7 +645,7 @@
             <div><input type="time" name="${prefix}_HORA" class="input-premium"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -647,7 +659,7 @@
             </div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Motivo do Idle"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -656,12 +668,12 @@
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-xs flex flex-col">
               <span>${item.label}</span>
-              ${item.desc ? `<span class="text-[9px] font-normal text-slate-400 -mt-0.5">${item.desc}</span>` : ''}
+              ${item.desc ? `<span class="text-[8px] font-normal text-slate-400 -mt-0.5">${item.desc}</span>` : ''}
             </div>
             <div><input type="number" name="${prefix}_QTD" class="input-premium text-center" placeholder="Qtd"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa/Obs"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -670,12 +682,12 @@
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="grid grid-cols-2 gap-1">
-              <div class="bg-slate-100 border border-slate-200 text-slate-500 rounded-lg flex items-center justify-center text-[11px] font-bold h-[34px]">${item.fixed}</div>
+              <div class="bg-slate-100 border border-slate-200 text-slate-500 rounded-lg flex items-center justify-center text-[10px] font-bold h-[30px]">${item.fixed}</div>
               <input type="text" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real">
             </div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -689,7 +701,7 @@
             </div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -707,7 +719,7 @@
             <div><input type="number" name="${prefix}_NUM" class="input-premium text-center" placeholder="Valor"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -718,19 +730,7 @@
             <div><input type="date" name="${prefix}_DATA" class="input-premium text-center text-xs"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
-              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
-            </div>
-          </div>`;
-        }
-        else if (item.type === 'input_text_just_anexo') {
-          /* Renderizador para os campos editáveis (copiar/colar livre) do bloco RR */
-          html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
-            <div><input type="text" name="${prefix}_TXT" class="input-premium text-center" placeholder="Digite / Cole"></div>
-            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
-            <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -741,7 +741,7 @@
             <div><input type="text" name="${prefix}_PERC" class="input-premium text-center" placeholder="Ex: 95%"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -758,13 +758,13 @@
             <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Observações gerais do turno"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'select_obs_anexo') {
-          /* Novo Tipo criado para as Auditorias: Linha suspensa (Status) + Linha de observação e anexo */
+          /* Linha Suspensa (Dropdown) + Linha de Observação de Auditorias */
           html += `<div class="unified-grid-row">
             <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div>
@@ -778,9 +778,9 @@
                 <option value="N/A">N/A</option>
               </select>
             </div>
-            <div><input type="text" name="${prefix}_OBS" class="input-premium text-xs" placeholder="Linha de Observação / Comentário"></div>
+            <div><input type="text" name="${prefix}_OBS" class="input-premium text-xs" placeholder="Linha de Observação"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[30px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -791,7 +791,7 @@
       container.innerHTML = html;
     }
 
-    // Função para exportação de imagem do relatório usando html2canvas
+    // Geração de imagem do relatório usando html2canvas
     function baixarRelatorio() {
       const content = document.getElementById('report-content');
       content.classList.add('canvas-snapshot');
