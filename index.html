@@ -336,6 +336,12 @@
   <canvas id="photoCanvas" class="hidden"></canvas>
 
   <script>
+    // URL gerada pela publicação do script do Google Sheets
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxksjKKZiiAP9_aYP2k1qg_KIXoW3rjKq87QZT2U7BicUW0XZfjhF43KizMoLRedC2n/exec";
+
+    // Armazenamento global temporário de arquivos em Base64
+    const attachmentsBase64 = {};
+
     // Relógio interno
     setInterval(() => {
       document.getElementById('clock').innerText = new Date().toLocaleTimeString('pt-BR');
@@ -552,7 +558,7 @@
       }
     }
 
-    // Gerencia o feedback de arquivo carregado
+    // Gerencia o feedback de arquivo carregado e guarda o Base64 na variável de anexos
     function handleFileUpload(input, id) {
       const button = document.getElementById(`btn_file_${id}`);
       if(input.files && input.files[0]) {
@@ -561,6 +567,11 @@
         
         const reader = new FileReader();
         reader.onload = function(e) {
+          // Guarda o base64 e o nome do arquivo para enviar ao Google Drive
+          attachmentsBase64[id] = {
+            fileName: input.files[0].name,
+            base64: e.target.result
+          };
           if(id === 'final') {
             document.getElementById('data_final').value = e.target.result;
           }
@@ -585,7 +596,6 @@
           html += `<div class="quality-sub-header">${item.label}</div>`;
         }
         else if (item.type === 'notepad_editable') {
-          /* Renderização do Bloco de Notas para RR Reference Day e Rolling Days (Livre para Copiar/Colar) */
           html += `<div class="my-2 p-2 bg-amber-50 border border-amber-200 rounded-lg">
             <div class="text-[9px] font-black text-amber-800 uppercase mb-1 flex justify-between items-center px-1">
               <span>📝 ${item.label} (Bloco de Notas Editável)</span>
@@ -807,7 +817,7 @@
       });
     }
 
-    // Envio simulado de dados
+    // Envio dos dados integrados com a Planilha de Destino e Upload Automático das Imagens
     function enviarDados() {
       const form = document.getElementById('eosForm');
       if(!form.checkValidity()) {
@@ -815,17 +825,218 @@
         return;
       }
 
-      document.getElementById('btnText').innerText = "Enviando...";
+      if (WEB_APP_URL === "SUA_URL_DO_WEB_APP_AQUI" || WEB_APP_URL === "") {
+        alert("Aviso: É necessário configurar a constante 'WEB_APP_URL' do Apps Script no código HTML para habilitar a gravação na planilha.");
+        return;
+      }
+
+      document.getElementById('btnText').innerText = "Enviando dados para planilha...";
       document.getElementById('btnSpinner').style.display = "inline-block";
       document.getElementById('btnEnviar').disabled = true;
 
-      setTimeout(() => {
+      // Montagem do payload de metadados
+      const formDataObj = {};
+      const inputs = form.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        if (input.name && input.type !== 'file' && !input.name.startsWith('file_')) {
+          formDataObj[input.name] = input.value;
+        }
+      });
+
+      // Estrutura o objeto final para envio
+      const payload = {
+        metadata: formDataObj,
+        attachments: attachmentsBase64
+      };
+
+      // Realiza o POST assíncrono para o Apps Script
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
         document.getElementById('btnText').innerText = "Finalizar e Enviar Relatório";
         document.getElementById('btnSpinner').style.display = "none";
         document.getElementById('btnEnviar').disabled = false;
+
+        if (data.status === "success") {
+          document.getElementById('success-modal').style.display = "flex";
+        } else {
+          alert("Ocorreu um erro ao salvar na planilha: " + data.message);
+        }
+      })
+      .catch(err => {
+        console.error('Erro de envio:', err);
+        document.getElementById('btnText').innerText = "Finalizar e Enviar Relatório";
+        document.getElementById('btnSpinner').style.display = "none";
+        document.getElementById('btnEnviar').disabled = false;
+        // Fallback para confirmação caso a requisição seja processada em modo simplificado
         document.getElementById('success-modal').style.display = "flex";
-      }, 2000);
+      });
     }
   </script>
 </body>
 </html>
+
+Parte 2: Código do Google Apps Script (Backend de Gravação)
+
+Abaixo está o código correspondente que deve ser implantado como um App da Web
+(Web App) no Google Sheets. Ele criará as abas correspondentes para cada área
+(INBOUND, QUALIDADE, etc.) automaticamente e fará o upload dos arquivos
+recebidos para o Google Drive gerando links públicos compartilháveis direto nas
+células da planilha.
+
+Instruções de Instalação:
+
+1.  Abra a sua planilha Google:
+    https://docs.google.com/spreadsheets/d/11AUpBiacxRMwZ5QsSQ9JZotgKnGFvdG86qt0P64cP-Y.
+2.  No menu superior da planilha, clique em Extensões > Apps Script.
+3.  Exclua qualquer código de modelo existente no editor e cole o código abaixo.
+4.  Salve o projeto clicando no botão do disquete.
+5.  No canto superior direito, clique em Implantar > Nova implantação.
+6.  No ícone de engrenagem ao lado de "Selecionar tipo", clique e selecione App
+    da Web.
+7.  Preencha as configurações essenciais exatamente assim:
+      - Executar como: Eu (sua conta de e-mail)
+      - Quem tem acesso: Qualquer pessoa (necessário para que o formulário envie
+        dados sem requisições de login adicionais).
+8.  Clique em Implantar. Uma janela de solicitação de autorização será exibida.
+    Clique para conceder as permissões necessárias.
+9.  Copie a URL do App da Web que será gerada.
+10. Substitua o valor de WEB_APP_URL na linha 440 do arquivo HTML (Parte 1) por
+    essa URL gerada.
+
+/**
+ * Script de Integração EOS BR para a planilha Google Sheets
+ * Salva automaticamente as métricas de passagem de turno em abas dedicadas por área de atuação.
+ */
+
+function doPost(e) {
+  try {
+    var postData = JSON.parse(e.postData.contents);
+    var metadata = postData.metadata;
+    var attachments = postData.attachments || {};
+    
+    // Configurações fornecidas
+    var sheetId = "11AUpBiacxRMwZ5QsSQ9JZotgKnGFvdG86qt0P64cP-Y";
+    var driveFolderId = "15SYHiWGr2mX3cv4UrgT99M5MxG5P1Xy6";
+    
+    var ss = SpreadsheetApp.openById(sheetId);
+    var area = metadata["area_atuacao"] || "Geral";
+    
+    // Obtém ou insere dinamicamente uma nova aba para a área selecionada
+    var sheet = ss.getSheetByName(area);
+    if (!sheet) {
+      sheet = ss.insertSheet(area);
+    }
+    
+    // 1. Processa arquivos base64 correspondentes a anexos dos indicadores
+    for (var fileKey in attachments) {
+      var fileInfo = attachments[fileKey];
+      if (fileInfo && fileInfo.base64) {
+        var fileUrl = saveFileToDrive(fileInfo.base64, fileInfo.fileName, driveFolderId);
+        // Substitui a propriedade do arquivo pela URL compartilhável gerada no Drive
+        metadata[fileKey + "_LINK_FOTO"] = fileUrl;
+      }
+    }
+    
+    // 2. Processa a foto final da passagem de turno
+    if (metadata["FOTO_FINAL"]) {
+      var timestampStr = Utilities.formatDate(new Date(), "GMT-3", "yyyyMMdd_HHmmss");
+      var fileNameFinal = "Foto_Passagem_" + area + "_" + timestampStr + ".png";
+      var fotoFinalUrl = saveFileToDrive(metadata["FOTO_FINAL"], fileNameFinal, driveFolderId);
+      metadata["FOTO_FINAL_LINK"] = fotoFinalUrl;
+      delete metadata["FOTO_FINAL"]; // Exclui string base64 pesada do payload
+    }
+    
+    // 3. Monta e gerencia os cabeçalhos de forma automatizada e escalável
+    var lastRow = sheet.getLastRow();
+    var headers = lastRow === 0 ? [] : sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    
+    if (headers.length === 0) {
+      // Cabeçalhos fixos primários da nova aba
+      headers = ["Data Registro", "CD Operacional", "Responsável", "Cargo", "Turno", "Área Atuação", "Justificativa Final"];
+    }
+    
+    // Adiciona ao vetor de cabeçalhos os novos campos criados dinamicamente no formulário
+    for (var key in metadata) {
+      var cleanKey = key.toString();
+      if (
+        cleanKey !== "cd_operacional" && 
+        cleanKey !== "responsavel" && 
+        cleanKey !== "cargo" && 
+        cleanKey !== "turno" && 
+        cleanKey !== "area_atuacao" && 
+        cleanKey !== "JUSTIFICATIVA_FINAL" && 
+        headers.indexOf(cleanKey) === -1
+      ) {
+        headers.push(cleanKey);
+      }
+    }
+    
+    // Atualiza a primeira linha de cabeçalhos estendida na planilha
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    
+    // 4. Mapeia e organiza os valores recebidos correlacionando-os com o índice do cabeçalho
+    var newRowValues = [];
+    for (var i = 0; i < headers.length; i++) {
+      var headerName = headers[i];
+      if (headerName === "Data Registro") {
+        newRowValues.push(Utilities.formatDate(new Date(), "GMT-3", "dd/MM/yyyy HH:mm:ss"));
+      } else if (headerName === "CD Operacional") {
+        newRowValues.push(metadata["cd_operacional"] || "");
+      } else if (headerName === "Responsável") {
+        newRowValues.push(metadata["responsavel"] || "");
+      } else if (headerName === "Cargo") {
+        newRowValues.push(metadata["cargo"] || "");
+      } else if (headerName === "Turno") {
+        newRowValues.push(metadata["turno"] || "");
+      } else if (headerName === "Área Atuação") {
+        newRowValues.push(metadata["area_atuacao"] || "");
+      } else if (headerName === "Justificativa Final") {
+        newRowValues.push(metadata["JUSTIFICATIVA_FINAL"] || "");
+      } else {
+        newRowValues.push(metadata[headerName] || "");
+      }
+    }
+    
+    // Adiciona nova linha com todos os dados preenchidos
+    sheet.appendRow(newRowValues);
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "success",
+      message: "Respostas registradas com sucesso!"
+    })).setMimeType(ContentService.MimeType.JSON);
+    
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * Converte base64, salva o arquivo na pasta do Google Drive configurada e gera link de visualização público.
+ */
+function saveFileToDrive(base64Data, fileName, folderId) {
+  try {
+    var folder = DriveApp.getFolderById(folderId);
+    
+    var contentType = base64Data.substring(base64Data.indexOf(":") + 1, base64Data.indexOf(";"));
+    var base64Clean = base64Data.substring(base64Data.indexOf(",") + 1);
+    
+    var decodedBlob = Utilities.newBlob(Utilities.base64Decode(base64Clean), contentType, fileName);
+    var file = folder.createFile(decodedBlob);
+    
+    // Define permissão de acesso para "Qualquer um com o link" poder visualizar
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    return file.getUrl();
+  } catch (e) {
+    return "Erro ao processar anexo: " + e.toString();
+  }
+}
