@@ -13,7 +13,7 @@
       --shopee-orange: #EE4D2D;
       --shopee-dark: #1e1e24;
       --shopee-bg: #f5f7fb;
-      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      --card-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.05);
     }
  
     body {
@@ -24,20 +24,20 @@
 
     .shopee-header {
       background: linear-gradient(135deg, #ee4d2d, #ff5722);
-      padding: 12px 24px;
+      padding: 10px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 8px 20px rgba(238, 77, 45, 0.15);
+      box-shadow: 0 6px 15px rgba(238, 77, 45, 0.15);
       border-bottom: 3px solid #ff7337;
     }
 
     .card-master {
       background: white;
-      border-radius: 16px;
+      border-radius: 14px;
       box-shadow: var(--card-shadow);
-      margin-bottom: 16px;
-      padding: 20px;
+      margin-bottom: 12px;
+      padding: 16px;
       border: 1px solid #e2e8f0;
       position: relative;
       overflow: hidden;
@@ -54,14 +54,14 @@
     }
 
     .section-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 900;
       color: #0f172a;
       letter-spacing: 0.5px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 6px;
+      margin-bottom: 10px;
       text-transform: uppercase;
     }
 
@@ -69,35 +69,35 @@
       content: '';
       display: inline-block;
       width: 5px;
-      height: 18px;
+      height: 16px;
       background: var(--shopee-orange);
       border-radius: 3px;
     }
 
     .quality-sub-header {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 900;
       color: #ee4d2d;
       text-transform: uppercase;
       letter-spacing: 1.2px;
       background-color: #fff5f3;
-      padding: 6px 12px;
+      padding: 4px 10px;
       border-left: 4px solid #ee4d2d;
       border-radius: 0 6px 6px 0;
-      margin-top: 14px;
-      margin-bottom: 6px;
+      margin-top: 10px;
+      margin-bottom: 4px;
       display: block;
       width: 100%;
     }
 
     .input-premium {
-      height: 38px;
+      height: 34px;
       border: 1.5px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 0 12px;
+      border-radius: 6px;
+      padding: 0 10px;
       width: 100%;
       transition: all 0.2s ease;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       background: #f8fafc;
       color: #334155;
@@ -114,16 +114,16 @@
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 12px center;
-      background-size: 14px;
-      padding-right: 32px;
+      background-position: right 10px center;
+      background-size: 12px;
+      padding-right: 28px;
     }
 
     .btn-toggle {
-      height: 38px;
+      height: 34px;
       flex: 1;
       border: 1.5px solid #e2e8f0;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 800;
       background: #f8fafc;
       color: #64748b;
@@ -136,8 +136,8 @@
       border-color: #cbd5e1;
     }
 
-    .active-sim { background: #10b981 !important; color: white !important; border-color: #10b981 !important; box-shadow: 0 3px 10px rgba(16, 185, 129, 0.2); }
-    .active-nao { background: #ee4d2d !important; color: white !important; border-color: #ee4d2d !important; box-shadow: 0 3px 10px rgba(238, 77, 45, 0.2); }
+    .active-sim { background: #10b981 !important; color: white !important; border-color: #10b981 !important; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15); }
+    .active-nao { background: #ee4d2d !important; color: white !important; border-color: #ee4d2d !important; box-shadow: 0 2px 6px rgba(238, 77, 45, 0.15); }
 
     .btn-send {
       background: linear-gradient(95deg, #1e1e24, #0f172a);
@@ -146,35 +146,35 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: all 0.3s;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+      box-shadow: 0 6px 15px rgba(15, 23, 42, 0.15);
       border: 1px solid #334155;
     }
 
     .btn-send:hover {
       transform: translateY(-1px);
-      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.3);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
       background: linear-gradient(95deg, #0f172a, #020617);
     }
 
     .unified-grid-row {
       display: grid;
-      gap: 12px;
+      gap: 8px;
       align-items: center;
-      padding: 4px 8px;
+      padding: 3px 6px;
       border-bottom: 1px solid #f1f5f9;
-      grid-template-columns: 2fr 1fr 2.5fr 0.8fr;
+      grid-template-columns: 2fr 1.2fr 2.5fr 0.8fr;
     }
 
     .unified-grid-row:hover {
       background-color: #f8fafc;
-      border-radius: 8px;
+      border-radius: 6px;
     }
 
     @media (max-width: 768px) {
       .unified-grid-row { 
         grid-template-columns: 1fr !important; 
-        gap: 8px; 
-        padding: 10px 4px; 
+        gap: 6px; 
+        padding: 8px 4px; 
       }
     }
 
@@ -196,7 +196,7 @@
       background-color: #10b981 !important;
       border-color: #059669 !important;
       color: white !important;
-      box-shadow: 0 3px 8px rgba(16, 185, 129, 0.15);
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15);
     }
 
     .canvas-snapshot .input-premium {
@@ -207,6 +207,19 @@
     
     .canvas-snapshot .btn-toggle:not(.active-sim):not(.active-nao) {
       opacity: 0.4;
+    }
+
+    /* Estilo robusto para manter o texto de Conclusão e Evidências íntegro e visível ao exportar */
+    #justificativa_final {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
+    }
+
+    .canvas-snapshot #justificativa_final {
+      border-color: #cbd5e1 !important;
+      height: auto !important;
+      min-height: 100px;
     }
   </style>
 </head>
@@ -228,9 +241,9 @@
       <form id="eosForm">
         <div class="card-master">
           <div class="section-title">Informações de Identificação</div>
-          <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-2">
             <div>
-              <label class="text-[10px] font-black text-slate-500 mb-1 block uppercase tracking-wider">CD Operacional</label>
+              <label class="text-[9px] font-black text-slate-500 mb-1 block uppercase tracking-wider">CD Operacional</label>
               <select name="cd_operacional" id="cd_operacional" class="input-premium" required onchange="updateInfoCard()">
                 <option value="">Selecione...</option>
                 <option value="BRFPE1">BRFPE1</option>
@@ -242,11 +255,11 @@
               </select>
             </div>
             <div>
-              <label class="text-[10px] font-black text-slate-500 mb-1 block uppercase tracking-wider">Responsável</label>
+              <label class="text-[9px] font-black text-slate-500 mb-1 block uppercase tracking-wider">Responsável</label>
               <input type="text" name="responsavel" id="responsavel" class="input-premium" placeholder="Nome" required oninput="updateInfoCard()">
             </div>
             <div>
-              <label class="text-[10px] font-black text-slate-500 mb-1 block uppercase tracking-wider">Cargo</label>
+              <label class="text-[9px] font-black text-slate-500 mb-1 block uppercase tracking-wider">Cargo</label>
               <select name="cargo" id="cargo" class="input-premium" required onchange="updateInfoCard()">
                 <option value="">Selecione</option>
                 <option value="TEAM LEADER">TEAM LEADER</option>
@@ -258,14 +271,14 @@
               </select>
             </div>
             <div>
-              <label class="text-[10px] font-black text-slate-500 mb-1 block uppercase tracking-wider">Turno</label>
+              <label class="text-[9px] font-black text-slate-500 mb-1 block uppercase tracking-wider">Turno</label>
               <select name="turno" id="turno" class="input-premium" required onchange="updateInfoCard()">
                 <option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option>
                 <option value="T4">T4</option><option value="T5">T5</option><option value="T6">T6</option><option value="T7">T7</option>
               </select>
             </div>
             <div>
-              <label class="text-[10px] font-black text-orange-600 mb-1 block uppercase tracking-wider">Área de Atuação</label>
+              <label class="text-[9px] font-black text-orange-600 mb-1 block uppercase tracking-wider">Área de Atuação</label>
               <select name="area_atuacao" id="areaSelect" class="input-premium border-orange-300 bg-orange-50 font-extrabold text-orange-700 shadow-sm" required onchange="renderFields(); updateInfoCard();">
                   <option value="">SELECIONAR ÁREA</option>
                   <option value="INBOUND">INBOUND</option>
@@ -286,10 +299,15 @@
 
         <div class="card-master">
           <div class="section-title">Conclusão e Evidências</div>
-          <textarea name="JUSTIFICATIVA_FINAL" id="justificativa_final" class="input-premium h-24 mb-4 py-2 resize-none block" placeholder="Relate aqui os principais desafios, gargalos ou recados para o próximo turno..." oninput="updateInfoCard()"></textarea>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <button type="button" id="btn_file_final" onclick="document.getElementById('file_final').click()" class="bg-slate-50 p-3 rounded-xl font-bold border-2 border-dashed border-slate-300 text-slate-600 hover:bg-slate-100 hover:border-slate-400 transition-all uppercase text-[11px] tracking-wider">📸 ANEXO PASSAGEM DE TURNO</button>
-              <button type="button" id="btnDownload" onclick="baixarRelatorio()" class="bg-orange-600 text-white p-3 rounded-xl font-black border-2 border-transparent hover:bg-orange-700 transition-all shadow-md text-[11px] tracking-wider uppercase">📥 GERAR E DESCARREGAR CARD (PNG)</button>
+          
+          <!-- Delimitação de espaços laterais internos adicionada para manter o texto legível e visível -->
+          <div class="px-2 md:px-6 mb-4">
+            <textarea name="JUSTIFICATIVA_FINAL" id="justificativa_final" class="input-premium h-28 py-2 px-3 resize-y block w-full rounded-lg border border-slate-300 bg-white text-sm" placeholder="Relate aqui os principais desafios, gargalos ou recados para o próximo turno..." oninput="updateInfoCard()"></textarea>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 px-2 md:px-6">
+              <button type="button" id="btn_file_final" onclick="document.getElementById('file_final').click()" class="bg-slate-50 p-3 rounded-xl font-bold border-2 border-dashed border-slate-300 text-slate-600 hover:bg-slate-100 hover:border-slate-400 transition-all uppercase text-[10px] tracking-wider">📸 ANEXO PASSAGEM DE TURNO</button>
+              <button type="button" id="btnDownload" onclick="baixarRelatorio()" class="bg-orange-600 text-white p-3 rounded-xl font-black border-2 border-transparent hover:bg-orange-700 transition-all shadow-md text-[10px] tracking-wider uppercase">📥 GERAR E DESCARREGAR CARD (PNG)</button>
           </div>
           <input type="file" id="file_final" class="hidden" accept="image/*" onchange="handleFileUpload(this, 'final')">
           <input type="hidden" name="FOTO_FINAL" id="data_final">
@@ -449,20 +467,27 @@
         {type: 'input_text_only', label: 'AVARIAS - NOME RESPONSÁVEL'},
         {type: 'qtd_just_anexo', label: 'QUANTIDADE RECOLHIDAS'},
         {type: 'qtd_just_anexo', label: 'AVARIAS TRATADAS'},
+        {type: 'qtd_just_anexo', label: 'BACKLOG AVARIAS'},
+        
+        /* ABA EXCLUSIVA RETURNS */
+        {type: 'section_header', label: 'RETURNS'},
+        {type: 'input_text_only', label: 'RETURNS - NOME RESPONSÁVEL'},
         {type: 'real_just_anexo', label: 'RETURNS'},
-        {type: 'qtd_just_anexo', label: 'BACKLOG'},
+        {type: 'qtd_just_anexo', label: 'BACKLOG RETURNS'},
         
         {type: 'section_header', label: 'RESPONSABILIDADE RR'},
         {type: 'input_text_only', label: 'RR - NOME RESPONSÁVEL'},
         {type: 'qtd_just_anexo', label: 'RR'},
-        {type: 'input_date_just_anexo', label: 'RR Reference Day'},
-        {type: 'input_date_just_anexo', label: 'Outbound Time'},
+        
+        /* RR Reference Day e Rolling Days agora usam "input_text_just_anexo" para ficarem completamente livres e editáveis para copiar e colar */
+        {type: 'input_text_just_anexo', label: 'RR Reference Day'},
+        {type: 'input_text_just_anexo', label: 'Outbound Time'},
         {type: 'input_number_just_anexo', label: 'OB Orders D-1'},
         {type: 'input_number_just_anexo', label: 'RR Orders D-1'},
         {type: 'input_perc_just_anexo', label: 'RR Rate D-1'},
         {type: 'input_perc_just_anexo', label: 'RR Rate D-2'},
         {type: 'input_perc_just_anexo', label: 'RR Rate D-3'},
-        {type: 'input_perc_just_anexo', label: 'RR 7 Rolling Days'},
+        {type: 'input_text_just_anexo', label: 'RR 7 Rolling Days'},
         {type: 'toggle_just', label: 'RR (Plano de Ação)'},
         
         {type: 'section_header', label: 'TREINAMENTOS'},
@@ -473,18 +498,19 @@
         {type: 'input_just_only', label: 'ANÁLISE LC PRODUTIVIDADE'},
         {type: 'input_text_only', label: 'REVISÃO MATERIAL - NOME RESPONSÁVEL'},
         
+        /* ABA DE AUDITORIAS - adicionado lista suspensa + LINHA DE OBSERVAÇÃO */
         {type: 'section_header', label: 'AUDITORIAS'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA DOCA INB'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA BOXING'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA PUTAWAY'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA PICKING'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA DEVICE'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA CHECKING'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA MERGE'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA SHIPPING'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA DOCA OUT'},
-        {type: 'qtd_just_anexo', label: 'AUDITORIA 5\'S'},
-        {type: 'qtd_just_anexo', label: 'TOTAL DE AUDITORIAS'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA DOCA INB'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA BOXING'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA PUTAWAY'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA PICKING'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA DEVICE'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA CHECKING'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA MERGE'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA SHIPPING'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA DOCA OUT'},
+        {type: 'select_obs_anexo', label: 'AUDITORIA 5\'S'},
+        {type: 'select_obs_anexo', label: 'TOTAL DE AUDITORIAS'},
         
         {type: 'section_header', label: 'CUBISCAN PE'},
         {type: 'qtd_just_anexo', label: 'CORREÇÃO REALIZADA'},
@@ -532,7 +558,6 @@
         button.classList.add('btn-attached');
         button.innerText = '✓ ANEXADO';
         
-        // Exemplo básico para converter em base64 se necessário no envio
         const reader = new FileReader();
         reader.onload = function(e) {
           if(id === 'final') {
@@ -560,36 +585,36 @@
         }
         else if (item.type === 'meta_real_perc_anexo') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="grid grid-cols-2 gap-1">
               <input type="number" id="meta_${id}" name="${prefix}_META" class="input-premium text-center" placeholder="Meta">
               <input type="number" id="real_${id}" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real" oninput="calcPerc('${id}')">
             </div>
             <div><input type="text" id="perc_${id}" name="${prefix}_PERC" class="input-premium bg-slate-100 text-center font-bold text-orange-600" placeholder="%" readonly></div>
             <div>
-               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+               <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
                <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'sim_nao_anexo') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="flex gap-1">
               <button type="button" onclick="setToggle(this, '${id}_v', 'SIM')" class="btn-toggle text-xs">SIM</button>
               <button type="button" onclick="setToggle(this, '${id}_v', 'NÃO')" class="btn-toggle text-xs">NÃO</button>
               <input type="hidden" id="${id}_v" name="${prefix}_STATUS">
             </div>
-            <div><input type="text" class="input-premium opacity-50" placeholder="Sem justificativa" disabled></div>
+            <div><input type="text" class="input-premium opacity-50 text-xs" placeholder="Sem justificativa" disabled></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'sim_nao_just_anexo' || item.type === 'toggle_just') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="flex gap-1">
               <button type="button" onclick="setToggle(this, '${id}_v', 'SIM')" class="btn-toggle text-xs">SIM</button>
               <button type="button" onclick="setToggle(this, '${id}_v', 'NÃO')" class="btn-toggle text-xs">NÃO</button>
@@ -597,131 +622,165 @@
             </div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'relogio_just_anexo') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div><input type="time" name="${prefix}_HORA" class="input-premium"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'idle_custom') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="grid grid-cols-2 gap-1">
               <input type="time" name="${prefix}_DE" class="input-premium text-center">
               <input type="time" name="${prefix}_ATE" class="input-premium text-center">
             </div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Motivo do Idle"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'qtd_just_anexo' || item.type === 'real_just_anexo') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm flex flex-col">
+            <div class="font-bold text-slate-700 text-xs flex flex-col">
               <span>${item.label}</span>
-              ${item.desc ? `<span class="text-[10px] font-normal text-slate-400 -mt-0.5">${item.desc}</span>` : ''}
+              ${item.desc ? `<span class="text-[9px] font-normal text-slate-400 -mt-0.5">${item.desc}</span>` : ''}
             </div>
             <div><input type="number" name="${prefix}_QTD" class="input-premium text-center" placeholder="Qtd"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa/Obs"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'meta_fixa_just_anexo') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="grid grid-cols-2 gap-1">
-              <div class="bg-slate-100 border border-slate-200 text-slate-500 rounded-lg flex items-center justify-center text-xs font-bold h-[38px]">${item.fixed}</div>
+              <div class="bg-slate-100 border border-slate-200 text-slate-500 rounded-lg flex items-center justify-center text-[11px] font-bold h-[34px]">${item.fixed}</div>
               <input type="text" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real">
             </div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'plano_real_anexo') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="grid grid-cols-2 gap-1">
               <input type="number" name="${prefix}_PLANO" class="input-premium text-center" placeholder="Plano">
               <input type="number" name="${prefix}_REAL" class="input-premium text-center" placeholder="Real">
             </div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'input_text_only') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="col-span-2"><input type="text" name="${prefix}_TXT" class="input-premium" placeholder="Digite o texto explicativo"></div>
-            <div><input type="text" class="input-premium opacity-50" placeholder="Sem anexo" disabled></div>
+            <div><input type="text" class="input-premium opacity-50 text-xs" placeholder="Sem anexo" disabled></div>
           </div>`;
         }
         else if (item.type === 'input_number_just_anexo') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div><input type="number" name="${prefix}_NUM" class="input-premium text-center" placeholder="Valor"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'input_date_just_anexo') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
-            <div><input type="date" name="${prefix}_DATA" class="input-premium text-center"></div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
+            <div><input type="date" name="${prefix}_DATA" class="input-premium text-center text-xs"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'input_text_just_anexo') {
+          /* Renderizador para os campos editáveis (copiar/colar livre) do bloco RR */
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
+            <div><input type="text" name="${prefix}_TXT" class="input-premium text-center" placeholder="Digite / Cole"></div>
+            <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'input_perc_just_anexo' || item.type === 'perc_just_anexo') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div><input type="text" name="${prefix}_PERC" class="input-premium text-center" placeholder="Ex: 95%"></div>
             <div><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Justificativa"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
         }
         else if (item.type === 'input_just_only') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Análise / Justificativa"></div>
-            <div><input type="text" class="input-premium opacity-50" placeholder="Sem anexo" disabled></div>
+            <div><input type="text" class="input-premium opacity-50 text-xs" placeholder="Sem anexo" disabled></div>
           </div>`;
         }
         else if (item.type === 'input_just_anexo_only') {
           html += `<div class="unified-grid-row">
-            <div class="font-bold text-slate-700 text-sm">${item.label}</div>
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
             <div class="col-span-2"><input type="text" name="${prefix}_JUST" class="input-premium" placeholder="Observações gerais do turno"></div>
             <div>
-              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[10px] font-black h-[38px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
+              <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
+            </div>
+          </div>`;
+        }
+        else if (item.type === 'select_obs_anexo') {
+          /* Novo Tipo criado para as Auditorias: Linha suspensa (Status) + Linha de observação e anexo */
+          html += `<div class="unified-grid-row">
+            <div class="font-bold text-slate-700 text-xs">${item.label}</div>
+            <div>
+              <select name="${prefix}_STATUS" class="input-premium text-xs font-bold text-slate-700">
+                <option value="">Selecione...</option>
+                <option value="REALIZADO">REALIZADO</option>
+                <option value="NÃO REALIZADO">NÃO REALIZADO</option>
+                <option value="PENDENTE">PENDENTE</option>
+                <option value="OK">OK</option>
+                <option value="NÃO OK">NÃO OK</option>
+                <option value="N/A">N/A</option>
+              </select>
+            </div>
+            <div><input type="text" name="${prefix}_OBS" class="input-premium text-xs" placeholder="Linha de Observação / Comentário"></div>
+            <div>
+              <button type="button" id="btn_file_${id}" onclick="document.getElementById('file_${id}').click()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 w-full text-[9px] font-black h-[34px] rounded-lg border border-slate-300 transition-all uppercase tracking-wider">ANEXO</button>
               <input type="file" id="file_${id}" class="hidden" onchange="handleFileUpload(this, '${id}')">
             </div>
           </div>`;
@@ -732,7 +791,7 @@
       container.innerHTML = html;
     }
 
-    // Função simulação de download do relatório usando html2canvas
+    // Função para exportação de imagem do relatório usando html2canvas
     function baixarRelatorio() {
       const content = document.getElementById('report-content');
       content.classList.add('canvas-snapshot');
